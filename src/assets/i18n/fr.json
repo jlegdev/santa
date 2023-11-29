@@ -1,0 +1,108 @@
+{
+  "general":{
+    "button":{
+        "confirm.create":"Oui, le créer",
+        "confirm.delete":"Oui, le supprimer",
+        "confirm.edit":"Oui, l'éditer",
+        "cancel.create":"Annuler",
+        "cancel.delete":"Non",
+        "cancel.edit":"Annuler",
+        "edit":"Editer",
+        "close":"Fermer",
+        "add":"Ajouter",
+        "change-status":"Changer le statut",
+        "cancel":"Annuler",
+        "go-back":"Retour arrière",
+        "delete":"Supprimer",
+        "validate":"Valider",
+        "back":"Retour arrière",
+        "reset":"Réinitialiser",
+        "next":"Suivant",
+        "upload-file":"Téléverser un fichier",
+        "login":"Connexion"
+    }
+  },
+  "home":{
+    "title":"Bienvenue {{name}}"
+  },
+  "credential":{
+    "title":"Crédentiels",
+    "class":{
+      "email":"Email",
+      "password":"Mot de passe"
+    }
+  },
+  "event":{
+    "title": {
+      "default":"Évènement",
+        "variant":{
+          "params":["pluriel"],
+          "variantLines":[
+          {
+            "value":"Évènements",
+            "params":{"pluriel":true}
+          }
+          ]
+        }
+    },
+    "class":{
+      "type":"Type",
+      "token":"Token",
+      "statu":"Statu",
+      "dateCreate":"Date de création",
+      "dateRegisterClose":"Date de fin d'inscription",
+      "dateEvent":"Date d'évènement",
+      "participants":"Participants",
+      "drawResult":"Résultat des tirages"
+    },
+    "list":{
+      "title":"Events List"
+    },
+    "new":{
+      "title":"Create event"
+    },
+    "join":{
+      "title":"Join event"
+    },
+    "remove":{
+      "title":"Leave an event"
+    }
+  },
+  "user":{
+    "title": {
+      "default":"Utilisateur",
+        "variant":{
+          "params":["pluriel"],
+          "variantLines":[
+          {
+            "value":"Utilisateurs",
+            "params":{"pluriel":true}
+          }
+          ]
+        }
+    },
+    "class":{
+      "firstName":"Prénom",
+      "lastName":"Nom de famille",
+      "email":"Email",
+      "profilePicture":"Photo de profil",
+      "eventsId":"Liste des évènements"
+    },
+    "button.new":"Ajouter un utilisateur",
+    "filter.placeholder":"Ex. Martin",
+    "delete.confirm.content":"Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
+    "new":{
+      "title":"Création utilisateur",
+      "confirm.content":"Êtes-vous sûr de vouloir créer cet utilisateur ?",
+      "success.message":"Utilisateur {{userName}} créé avec succès",
+      "error.message":"Impossible de créer l'utilisateur",
+      "error-already-exist-email.message":"L'email {{email}} est déja associé à un utilisateur existing"
+    },
+    "edit":{
+      "title":"Edition utilisateur",
+      "confirm.content":"Êtes-vous sûr de vouloir modifier cet utilisateur ?",
+      "success.message":"Utilisateur {{userName}} édité avec succès",
+      "error.message":"Impossible d'éditer l'utilisateur"
+    }
+  }
+}

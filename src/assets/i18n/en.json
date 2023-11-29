@@ -1,0 +1,109 @@
+{
+  "general":{
+    "button":{
+      "confirm.create":"Yes, create it",
+      "confirm.delete":"Yes, delete it",
+      "confirm.edit":"Yes, update it",
+      "cancel.create":"Cancel",
+      "cancel.delete":"No",
+      "cancel.edit":"Cancel",
+      "close":"Close",
+      "edit":"Edit",
+      "add":"Add",
+      "delete":"Delete",
+      "cancel":"Cancel",
+      "go-back":"Go back",
+      "validate":"Validate",
+      "back":"Back",
+      "reset":"Reset",
+      "next":"Next",
+      "upload-file":"Upload files",
+      "login":"Login"
+    }
+  },
+  "home":{
+    "title":"Welcome {{name}}"
+  },
+  "credential":{
+    "title":"Credentials",
+    "class":{
+      "login":"TGI",
+      "password":"Password"
+    }
+  },
+  "event":{
+    "title": {
+      "default":"Event",
+        "variant":{
+          "params":["pluriel"],
+          "variantLines":[
+          {
+            "value":"Events",
+            "params":{"pluriel":true}
+          }
+          ]
+        }
+    },
+    "class":{
+      "type":"Type",
+      "token":"Token",
+      "statu":"Statu",
+      "dateCreate":"Created date",
+      "dateRegisterClose":"Closing register date",
+      "dateEvent":"Event date",
+      "participants":"Participants",
+      "drawResult":"Draw result"
+    },
+    "list":{
+      "title":"Events List"
+    },
+    "new":{
+      "title":"Create event"
+    },
+    "join":{
+      "title":"Join event"
+    },
+    "remove":{
+      "title":"Leave an event"
+    }
+  },
+  "user":{
+    "title": {
+      "default":"User",
+        "variant":{
+          "params":["pluriel"],
+          "variantLines":[
+          {
+            "value":"Users",
+            "params":{"pluriel":true}
+          }
+          ]
+        }
+    },
+    "class":{
+      "firstName":"First name",
+      "lastName":"Surname",
+      "email":"Mail",
+      "profilePicture":"Profile picture",
+      "eventsId":"Events list"
+
+    },
+    "button.new":"Add a user",
+    "filter.placeholder":"Ex. PROD",
+    "delete.confirm.content":"Are you sure you want to remove this user ?",
+    "new":{
+      "title":"User creation",
+      "confirm.content":"Are you sure you want to create this user  ?",
+      "success.message":"User {{userName}} successfully created",
+      "error.message":"Unable to create the user",
+      "error-already-exist-tgi.message":"Tgi {{tgi}} is already associated to an existing user",
+      "error-already-exist-email.message":"Mail {{email}} is already associated to an existing user"
+    },
+    "edit":{
+      "title":"User edition",
+      "confirm.content":"Are you sure you want to edit this user ?",
+      "success.message":"User {{userName}} successfully updated",
+      "error.message":"Unable to update the user"
+    }
+  }
+}
