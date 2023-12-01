@@ -23,7 +23,14 @@ export class StorageService {
 		const user: User | string = this._getLocal(StorageKeyEnum.KEY_USER);
 		return user ? (JSON.parse(user) as User) : undefined;
 	}
-
+	public getLang(): string {
+		// on récupère "en"
+		// on veut supprimer les '"'
+		// ouais c'est moche
+		// prendre le temps d'harmoniser cela
+		const lang: string = this._getLocal(StorageKeyEnum.KEY_LANG).replace('"', '').replace('"', '');
+		return lang;
+	}
 	/** DELETE **/
 	public deleteToken(): void {
 		this._removeLocal(StorageKeyEnum.KEY_TOKEN);
@@ -33,6 +40,9 @@ export class StorageService {
 		this._removeLocal(StorageKeyEnum.KEY_USER);
 	}
 
+	public deleteLang(): void {
+		this._removeLocal(StorageKeyEnum.KEY_LANG);
+	}
 	/** STORE **/
 	public storeToken(token: string): void {
 		this.deleteToken();
@@ -44,6 +54,10 @@ export class StorageService {
 		this._storeLocal(StorageKeyEnum.KEY_USER, user);
 	}
 
+	public storeLang(lang: string): void {
+		this.deleteLang();
+		this._storeLocal(StorageKeyEnum.KEY_LANG, lang);
+	}
 	/**
 	 * Récupère une donnée de la session
 	 * @param key la référence de la donnée à récupérer

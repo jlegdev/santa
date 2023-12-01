@@ -1,0 +1,17 @@
+.container{
+  width:90%
+}
+
+.container-info{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}

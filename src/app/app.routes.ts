@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
 import { MainLayoutComponent } from './component/core/main-layout/main-layout.component';
-import { AuthGuard } from './guard/auth.can-activate.guard';
 import { LoggedRoutes } from './component/logged.routes';
-import { LoginComponent } from './component/login/view/login.component';
+import { LoginContainerComponent } from './component/login/container/login-container.component';
 import { RoutePathEnum } from './enum/route.path.enum';
+import { AuthGuard } from './guard/auth.can-activate.guard';
 
 export const AppRoutes: Routes = [
 	{
 		path: RoutePathEnum.LOGIN,
-		component: LoginComponent,
+		component: LoginContainerComponent,
 		// title: RouteTitleMap.get(RoutePathEnum.LOGIN),
 	},
 	{

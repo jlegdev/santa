@@ -1,1 +1,229 @@
+@use '@angular/material' as mat;
 /* You can add global styles to this file, and also import other style files */
+// @import 'material-icons/iconfont/filled.scss';
+// Should be included one time
+// contains prerequisites styles for common features
+@include mat.core();
+
+
+// @import '~material-icons-font/sass/sizing'; // optional rules for icons sizing recommended by font designers
+// @import '~material-icons-font/sass/coloring'; // optional rules for icons color rules with light and dark background and inactive state
+// Should be included one time
+// contains structural indicator for all components
+// @include mat.strong-focus-indicators();
+
+@import '/src/assets/scss/theme-santa.scss';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+@mixin custom-theme($theme) {
+  // @include test-list-theme($theme);
+}
+
+.default-theme {
+  // @import 'material-icons/iconfont/filled.scss';
+  // emit theme dependent styles for common features sued acrossm ultipl components
+  @include mat.core-theme($santa-theme);
+  // either we include theme for spceific component like :
+  // @include mat.button-theme($santa-theme);
+  // either we include for theme for all components :    (exist with all-component-colors | all-component-typographies | all-component-densities)
+  @include mat.all-component-themes($santa-theme);
+  // @include mat.strong-focus-indicators-theme($santa-theme);
+
+  //@include angular-material-theme($santa-theme);
+  @include custom-theme($santa-theme);
+
+  .primary {
+    background-color: $primary;
+    color: white !important;
+  }
+
+  .accent {
+    background-color: $accent;
+    color: white !important;
+  }
+
+  .warn {
+    background-color: $warn;
+  }
+}
+
+.dark-theme {
+  // here we doesnt use core and core-theme. we precise color. indeed dark and light theme share the same density / typography. it reduces the redundances scss
+  @include mat.core-color($santa-dark-theme);
+  @include mat.all-component-colors($santa-dark-theme);
+  // @include mat.strong-focus-indicators-color($santa-dark-theme);
+
+  // @include angular-material-theme($santa-dark-theme);
+  @include custom-theme($santa-dark-theme);
+
+  .primary {
+    background-color: $primary;
+  }
+
+  .accent {
+    background-color: $accent;
+    color: white;
+  }
+
+  .warn {
+    background-color: $warn;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.div-center {
+  display: flex;
+  justify-content: center;
+}
+
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.marged {
+  margin: 5px !important;
+}
+
+.marged-m {
+  margin: 10px !important
+}
+
+.marged-l {
+  margin: 15px !important;
+}
+
+.fixed-bottom-right {
+  position: fixed !important;
+  z-index: 100;
+  bottom: 2%;
+  right: 1%;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
+mat-card {
+  *.centered-column {
+    display: flex;
+    margin: 5px !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+
+// Notif
+.notif-error {
+  color: rgba(255, 75, 53, 1);
+}
+
+.notif-general {
+  color: grey;
+}
+
+.notif-success {
+  color: rgba(153, 255, 37, 1);
+}
+
+// Form
+.centered-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+// Buttons
+.buttons-action {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-right: 5px !important;
+  margin-bottom: 5px;
+}
+
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
+}
+
+
+
+
+.fill {
+  height: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  width: 100%;
+}
+
+.table-spaced {
+  width: 90%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.table-spaced-fill {
+  width: 100%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.actions-sp-btw {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.actions :not(:last-child),
+.actions-sp-btw :not(:last-child) {
+  margin-right: 5px;
+}

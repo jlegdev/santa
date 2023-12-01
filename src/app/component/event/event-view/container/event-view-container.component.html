@@ -1,1 +1,7 @@
-<p>event-view-container works!</p>
+<ng-container *ngIf="event$ | async as event;else loading">
+  <app-event-view [event]="event"></app-event-view>
+</ng-container>
+
+<ng-template #loading>
+  <app-spinner></app-spinner>
+</ng-template>

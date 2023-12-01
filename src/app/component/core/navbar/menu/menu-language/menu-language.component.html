@@ -1,0 +1,10 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Language change">
+  <mat-icon>{{IconEnum.MENU_LANGUAGE}}</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item *ngFor="let lang of languagesAvailable;trackBy:trackLanguage"
+    (click)="onLanguageChange(lang.index)">
+    <mat-icon [svgIcon]="lang.icon"></mat-icon>
+    <span>{{lang.label}}</span>
+  </button>
+</mat-menu>

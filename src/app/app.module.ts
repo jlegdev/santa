@@ -1,64 +1,96 @@
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import localeFr from '@angular/common/locales/fr';
+import { APP_INITIALIZER, LOCALE_ID, NgModule, Provider } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './component/core/main-layout/main-layout.component';
-import { EventJoinContainerComponent } from './component/event/event-join/container/event-join-container.component';
-import { EventJoinComponent } from './component/event/event-join/view/event-join.component';
-import { EventListContainerComponent } from './component/event/event-list/container/event-list-container.component';
-import { EventListComponent } from './component/event/event-list/view/event-list.component';
-import { EventViewContainerComponent } from './component/event/event-view/container/event-view-container.component';
-import { EventViewComponent } from './component/event/event-view/view/event-view.component';
-import { HomeContainerComponent } from './component/home/container/home-container.component';
-import { HomeComponent } from './component/home/view/home.component';
-import { LoginContainerComponent } from './component/login/container/login-container.component';
-import { LoginComponent } from './component/login/view/login.component';
-import { authServiceProviderFactory } from './service/providers/auth.service.provider';
-import { eventServiceProviderFactory } from './service/providers/event.service.provider';
-import { userServiceProviderFactory } from './service/providers/user.service.provider';
+import { NavbarModule } from './component/core/navbar/navbar.module';
+import { EventModule } from './component/event/event.module';
+import { HomeModule } from './component/home/home.module';
+import { LoginModule } from './component/login/login.module';
+import { AuthService } from './service/api/auth.service';
+import { EventService } from './service/api/event.service';
+import { AuthMockService } from './service/api/mock/auth.mock.service';
+import { EventMockService } from './service/api/mock/event.mock.service';
+import { UserMockService } from './service/api/mock/user.mock.service';
+import { UserService } from './service/api/user.service';
+import { TradService } from './service/trad.service';
 import { SpinnerModule } from './shared/components/ui/spinner/spinner/spinner.module';
+import { TradPipeModule } from './shared/trad.module';
+
+// AoT requires an exported function for factories
+export function createTranslateLoader(http: HttpClient) {
+	// Ici on précise la localisation des fichier de trad(2eme arg), et la terminaison de ceux ci(3eme arg)
+	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+export function translationInitializer(translationService: TradService) {
+	return function () {
+		return translationService.init();
+	};
+}
+
+// the second parameter 'fr' is optional
+registerLocaleData(localeFr, 'fr');
 
 const AngularModules: any[] = [BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, ReactiveFormsModule];
-const MaterialModules: any[] = [MatCardModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule];
-const UIModules: any[] = [SpinnerModule];
+const MaterialModules: any[] = [MatCardModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule];
+const UIModules: any[] = [NavbarModule, SpinnerModule];
+const InternalModules: any[] = [
+	TradPipeModule,
+	TranslateModule.forRoot({
+		loader: {
+			provide: TranslateLoader,
+			useFactory: createTranslateLoader,
+			deps: [HttpClient],
+		},
+		// Ici ne pas ajouter le langage par défaut car il y a une  dépendance cyclique entre TranslateModule et HttpInterceptor
+		// Les deux dépendants de HttpClient. Translate Service initialise HttpClient qui initialise HttpClientError qui trigger L'HttpInterceptor
+		// defaultLanguage: 'fr',
+	}),
+];
+const LazyModules: any[] = [HomeModule, LoginModule, EventModule];
+
+const providers: Provider[] = [
+	{ provide: LOCALE_ID, useValue: 'fr' },
+	// { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
+	{
+		provide: APP_INITIALIZER,
+		useFactory: translationInitializer,
+		deps: [TradService],
+		multi: true,
+	},
+	{
+		provide: AuthService,
+		useClass: environment.isMock ? AuthMockService : AuthService,
+	},
+	{
+		provide: EventService,
+		useClass: environment.isMock ? EventMockService : EventService,
+	},
+	{
+		provide: UserService,
+		useClass: environment.isMock ? UserMockService : UserService,
+	},
+];
 @NgModule({
-	declarations: [
-		AppComponent,
-		LoginComponent,
-		HomeComponent,
-		EventJoinComponent,
-		EventListComponent,
-		EventViewComponent,
-		EventJoinContainerComponent,
-		EventListContainerComponent,
-		EventViewContainerComponent,
-		HomeContainerComponent,
-		MainLayoutComponent,
-		LoginContainerComponent,
-	],
-	imports: [AngularModules, MaterialModules, UIModules],
-	providers: [
-		{
-			provide: 'AuthService',
-			useFactory: authServiceProviderFactory,
-		},
-		{
-			provide: 'EventService',
-			useFactory: eventServiceProviderFactory,
-		},
-		{
-			provide: 'UserService',
-			useFactory: userServiceProviderFactory,
-		},
-	],
+	declarations: [AppComponent, MainLayoutComponent],
+	imports: [AngularModules, InternalModules, MaterialModules, UIModules, LazyModules],
+	providers: [providers],
+	exports: [TradPipeModule],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

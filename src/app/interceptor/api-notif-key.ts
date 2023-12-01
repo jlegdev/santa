@@ -1,0 +1,33 @@
+export const EnvPathTradKeyMap: Map<string, string> = new Map<string, string>([
+	// ['authentication.url.200.post', 'authentication.200.post'],
+	// ['authentication.url.401.post', 'authentication.401.post'],
+	// ['user.oneUser.200.put', 'user.oneUser.200.put'],
+	// ['user.oneUser.200.delete', 'user.oneUser.200.delete'],
+	// ['user.oneUser.409.put', 'user.oneUser.409.put'],
+	// ['user.url.409.post', 'user.url.409.post'],
+	// ['user.url.200.post', 'user.url.200.post'],
+	// ['user.updateCredential.401.put', 'user.updateCredential.401.put'],
+	// ['user.updateCredential.200.put', 'user.updateCredential.200.put'],
+	// ['role.oneRole.409.put', 'role.oneRole.409.put'],
+	// ['role.url.409.post', 'role.url.409.post'],
+	// ['role.oneRole.200.put', 'role.oneRole.200.put'],
+	// ['role.oneRole.200.delete', 'role.oneRole.200.delete'],
+	// ['role.url.200.post', 'role.url.200.post'],
+	// ['tags.oneTag.200.put', 'tag.oneTag.200.put'],
+	// ['tags.url.201.post', 'tag.url.201.post'],
+	// ['tags.url.409.post', 'tag.url.409.post'],
+	// ['tags.url.409.put', 'tag.url.409.put'],
+	// ['tags.oneTag.200.delete', 'tag.oneTag.200.delete'],
+]);
+
+export const ApiUrlEnvPath: Map<string, string> = new Map<string, string>([
+	// ['token', 'authentication.url'],
+	// ['user/{id}', 'user.oneUser'],
+	// ['user/edit-own/{id}', 'user.oneUser'],
+	// ['user/{id}/update-credential', 'user.updateCredential'],
+	// ['roles/{id}', 'role.oneRole'],
+	// ['tags/{id}', 'tags.oneTag'],
+	// ['user', 'user.url'],
+	// ['roles', 'role.url'],
+	// ['tags', 'tags.url'],
+]);

@@ -1,0 +1,15 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User information">
+  <mat-icon>{{IconEnum.MENU_USER}}</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="onLogout()">
+    <mat-icon [svgIcon]="IconEnum.USER_LOGOUT"></mat-icon>
+    <span>{{'user.logout'|trad:'navbar.menu' | async}}</span>
+  </button>
+
+  <button mat-menu-item (click)="onUserAccount()" [disabled]="true">
+    <mat-icon>{{IconEnum.USER_ACCOUNT}}</mat-icon>
+    <span>{{'user.account'|trad:'navbar.menu' | async}}</span>
+  </button>
+
+</mat-menu>

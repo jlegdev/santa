@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>
+  {{title}}
+</h1>
+<mat-dialog-content>
+  <p>
+    {{message}}
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button mat-dialog-close (click)="onDismiss()" tabindex="-1">{{cancelButtonText}}</button>
+  <button mat-raised-button color="warn" (click)="onConfirmClick()" tabindex="1">{{confirmButtonText}}</button>
+</mat-dialog-actions>

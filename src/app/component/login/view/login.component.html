@@ -1,1 +1,21 @@
-<p>login works!</p>
+<div class="fill centered-column main-container">
+  <div class="container">
+    <img alt="logo data hub" class="img" [src]="imgSrc">
+    <form [formGroup]="form" (ngSubmit)="onValid()" class="centered-column">
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{i18nCredential.LOGIN | trad : i18nCredential.NAMESPACE_CLASS | async}}</mat-label>
+        <input matInput type="text" required [formControlName]="'login'">
+      </mat-form-field>
+
+      <span></span>
+      <mat-form-field appearance="fill">
+        <mat-label>{{i18nCredential.PASSWORD | trad : i18nCredential.NAMESPACE_CLASS | async}}</mat-label>
+        <input matInput required type="password" [formControlName]="i18nCredential.PASSWORD">
+      </mat-form-field>
+
+      <app-confirm-button [text]="'login' | trad: 'general.button' | async" [isDisabled]="form.invalid"
+        [isLoading]="isLoading" (emitKeyUpEnter)="onValid()"></app-confirm-button>
+    </form>
+  </div>
+</div>

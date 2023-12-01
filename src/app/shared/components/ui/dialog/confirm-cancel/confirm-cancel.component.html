@@ -1,0 +1,31 @@
+<!-- <h1 mat-dialog-title>
+  {{ title }}
+</h1>
+<mat-dialog-content>
+
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+
+</mat-dialog-actions> -->
+<div class="container-global">
+  <h1 mat-dialog-title>
+  </h1>
+  <div mat-dialog-content>
+    <p>
+      {{ message }}
+    </p>
+  </div>
+
+
+  <div class="container-buttons">
+    <div>
+      <button mat-raised-button mat-dialog-close (click)="onDismiss()" tabindex="-1">
+        {{ cancelButtonText }}</button>
+    </div>
+    <div>
+      <button mat-raised-button color="warn" (click)="onConfirm()" tabindex="1">
+        {{ confirmButtonText }}
+      </button>
+    </div>
+  </div>
+</div>

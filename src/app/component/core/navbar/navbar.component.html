@@ -1,0 +1,25 @@
+<div class="container-navbar">
+  <mat-toolbar color="primary" class="toolbar-app">
+    <mat-toolbar-row>
+      <div class="toolbar">
+        <div class="container-application-link">
+          <!-- <button (click)="onSideNavToggle()" mat-icon-button>
+            <mat-icon>{{IconEnum.MENU_SIDENAV}}</mat-icon>
+          </button> -->
+          <h1 class="clickable title" (click)="onTitleClick()">
+            Santa
+          </h1>
+
+          <span class="menu-spacer"></span>
+        </div>
+        <div class="container-administration-link">
+          <app-menu-language (emitLanguageChange)="onLanguageChange($event)"></app-menu-language>
+          <app-menu-user (emitLogout)="onLogout()"></app-menu-user>
+          <div class=" container-logo">
+          </div>
+          <!--<app-menu-theme (emitThemeChange)="onThemeChange($event)"></app-menu-theme>-->
+        </div>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

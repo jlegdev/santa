@@ -12,22 +12,81 @@
       "add":"Add",
       "delete":"Delete",
       "cancel":"Cancel",
+      "join":"Join ! ",
       "go-back":"Go back",
       "validate":"Validate",
       "back":"Back",
       "reset":"Reset",
       "next":"Next",
       "upload-file":"Upload files",
-      "login":"Login"
+      "login":"Login",
+      "see":"See"
+    },
+    "request":{
+      "post":{
+        "success":{
+          "title": "Success",
+          "message": "Resource was successfully created"
+        }
+      },
+      "delete":{
+        "success":{
+          "title":"Success",
+          "message":"Resource was successfully removed"
+        }
+      },
+      "put":{
+        "success":{
+          "title": "Success",
+          "message": "Resource has been successfully modified"
+        }
+      },
+      "get":{
+        "success":{
+          "title": "Success",
+          "message": "Resource has been successfully modified"
+        }
+      },
+      "authentication":{
+        "200":{
+          "post":{
+            "title":"Success",
+            "message":"You are now connected with success"
+          }
+        },
+        "401":{
+          "post":{
+            "title":"Error",
+            "message":"Password or Login incorrect"
+          }
+        }
+      }
     }
   },
+  "navbar":{
+    "menu.user.account":"Account",
+    "menu.user.logout":"Logout",
+    "home":"Home",
+    "change-log":"Change log",
+    "tag": "Tags",
+    "algorithm":"Algorithms",
+    "analysis":"Analysis",
+    "admin":"Admin",
+    "update-password":"Update password",
+    "logout":"Logout"
+  },
   "home":{
-    "title":"Welcome {{name}}"
+    "title":"Welcome {{name}}",
+    "event":{
+      "list":"Here your running events",
+      "join":"Join an existant event",
+      "create":"Create an event"
+    }
   },
   "credential":{
     "title":"Credentials",
     "class":{
-      "login":"TGI",
+      "login":"Email",
       "password":"Password"
     }
   },
@@ -45,27 +104,41 @@
         }
     },
     "class":{
+      "creator":"Creator",
+      "title":"Title",
       "type":"Type",
       "token":"Token",
       "statu":"Statu",
       "dateCreate":"Created date",
       "dateRegisterClose":"Closing register date",
       "dateEvent":"Event date",
-      "participants":"Participants",
-      "drawResult":"Draw result"
+      "participants":{
+        "default":"Participant",
+        "variant":{
+          "params":["pluriel"],
+          "variantLines":[
+          {
+            "value":"Participants",
+            "params":{"pluriel":true}
+          }
+          ]
+        }
+      },
+      "drawResult":"Draw result",
+      "description":"Description",
+      "budget":"Budget"
     },
-    "list":{
-      "title":"Events List"
-    },
-    "new":{
-      "title":"Create event"
+    "statut":{
+      "registering":"waiting for participants to join",
+      "waiting_draft":"Waiting for the draw",
+      "running":"Running",
+      "finished":"Finished"
     },
     "join":{
-      "title":"Join event"
+      "title":"Join an event",
+      "subtitle":"Enter the token that your friend has given you in the field below, then click on join button. If you are dyslexic, it's not my fault"
     },
-    "remove":{
-      "title":"Leave an event"
-    }
+    "view":"View event details"
   },
   "user":{
     "title": {

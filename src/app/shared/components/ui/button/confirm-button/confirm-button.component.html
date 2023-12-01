@@ -1,0 +1,11 @@
+<ng-container *ngIf="!isLoading else buttonLoading">
+  <button (click)="onClick()" (keyup.enter)="onKeyUpEnter()" mat-flat-button color="primary" [disabled]="isDisabled"
+    [class.spinner]="isLoading">{{text}}
+  </button>
+</ng-container>
+
+<ng-template #buttonLoading>
+  <button (click)="onClick()" (keyup.enter)="onKeyUpEnter()" mat-flat-button color="primary" [disabled]="isDisabled"
+    [disabled]="isDisabled" [class.spinner]="isLoading">{{text}}
+  </button>
+</ng-template>

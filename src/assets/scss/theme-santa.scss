@@ -1,0 +1,128 @@
+@use '@angular/material' as mat;
+$primary-map-color:  (
+	gradient:  linear-gradient(180deg, rgba(36, 41, 117, 0.637) 0%, rgba(93, 190, 212, 0.651) 100%),
+	100:  #bdbfd6,
+	200:  #9295ba,
+	300:  #666a9e,
+	400:  #454a8a,
+	500:  #242a75,
+	600:  #20256d,
+	700:  #1b1f62,
+	800:  #161958,
+	900:  #0d0f45,
+	A100:  #7e80ff,
+	A200:  #4b4fff,
+	A400:  #181dff,
+	A700:  #0005fd,
+	contrast:  (
+		50:  #000000,
+		100:  #000000,
+		200:  #000000,
+		300:  #ffffff,
+		400:  #ffffff,
+		500:  #ffffff,
+		600:  #ffffff,
+		700:  #ffffff,
+		800:  #ffffff,
+		900:  #ffffff,
+		A100:  #000000,
+		A200:  #ffffff,
+		A400:  #ffffff,
+		A700:  #ffffff,
+	),
+);
+
+$accent-map-color:  (
+	50:  #ecf7fa,
+	100:  #ceecf2,
+	200:  #aedfea,
+	300:  #8ed2e1,
+	400:  #75c9da,
+	500:  #5dbfd4,
+	600:  #55b9cf,
+	700:  #4bb1c9,
+	800:  #41a9c3,
+	900:  #309bb9,
+	A100:  #feffff,
+	A200:  #cbf3ff,
+	A400:  #98e7ff,
+	A700:  #7fe1ff,
+	contrast:  (
+		50:  #000000,
+		100:  #000000,
+		200:  #000000,
+		300:  #000000,
+		400:  #000000,
+		500:  #ffffff,
+		600:  #ffffff,
+		700:  #ffffff,
+		800:  #ffffff,
+		900:  #ffffff,
+		A100:  #000000,
+		A200:  #000000,
+		A400:  #000000,
+		A700:  #000000,
+	),
+);
+
+$warn-map-color:  (
+	50:  #ffe0e0,
+	100:  #ffb3b3,
+	200:  #ff8080,
+	300:  #ff4d4d,
+	400:  #ff2626,
+	500:  #ff0000,
+	600:  #ff0000,
+	700:  #ff0000,
+	800:  #ff0000,
+	900:  #ff0000,
+	A100:  #ffffff,
+	A200:  #fff2f2,
+	A400:  #ffbfbf,
+	A700:  #ffa6a6,
+	contrast:  (
+		50:  #000000,
+		100:  #000000,
+		200:  #000000,
+		300:  #000000,
+		400:  #ffffff,
+		500:  #ffffff,
+		600:  #ffffff,
+		700:  #ffffff,
+		800:  #ffffff,
+		900:  #ffffff,
+		A100:  #000000,
+		A200:  #000000,
+		A400:  #000000,
+		A700:  #000000,
+	),
+);
+
+$typography:  mat.define-typography-config();
+$santa-primary-palette: mat.define-palette($primary-map-color);
+$santa-accent-palette:  mat.define-palette($accent-map-color);
+$santa-warn-palette:  mat.define-palette($warn-map-color);
+
+$santa-theme: mat.define-light-theme((
+  color: (
+    primary: $santa-primary-palette,
+    accent: $santa-accent-palette,
+    warn: $santa-warn-palette
+  ),
+  typography: $typography,
+  density: 0
+));
+
+$santa-dark-theme:  mat.define-dark-theme((
+  color: (
+    primary: $santa-primary-palette,
+    accent: $santa-accent-palette,
+    warn: $santa-warn-palette ),
+  typography: $typography,
+  density: 0
+));
+
+
+$primary:  mat.get-color-from-palette($primary-map-color, 500);
+$accent:  mat.get-color-from-palette($accent-map-color, 500);
+$warn:  mat.get-color-from-palette($warn-map-color, 500);

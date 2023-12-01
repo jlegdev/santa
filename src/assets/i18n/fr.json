@@ -9,6 +9,7 @@
         "cancel.edit":"Annuler",
         "edit":"Editer",
         "close":"Fermer",
+        "join":"Rejoindre ! ",
         "add":"Ajouter",
         "change-status":"Changer le statut",
         "cancel":"Annuler",
@@ -19,16 +20,74 @@
         "reset":"Réinitialiser",
         "next":"Suivant",
         "upload-file":"Téléverser un fichier",
-        "login":"Connexion"
+        "login":"Connexion",
+        "see":"Voir"
+    },
+    "request":{
+      "post":{
+        "success":{
+          "title":"Succès",
+          "message":"La ressource a bien été créée"
+        }
+      },
+      "delete":{
+        "success":{
+          "title":"Succès",
+          "message":"La ressource a bien été supprimée"
+        }
+      },
+      "put":{
+        "success":{
+          "title":"Succès",
+          "message":"La ressource a bien été modifiée"
+        }
+      },
+      "get":{
+        "success":{
+          "title": "Succès",
+          "message": "Les ressources ont bien été récupérées"
+        }
+      },
+      "authentication":{
+        "200":{
+          "post":{
+            "title":"Succès",
+            "message":"Vous êtes connectés avec succès"
+          }
+        },
+        "401":{
+          "post":{
+            "title":"Erreur",
+            "message":"Mot de passe ou Tgi incorrect"
+          }
+        }
+      }
     }
   },
+  "navbar":{
+    "menu.user.account":"Compte",
+    "menu.user.logout":"Se déconnecter",
+    "home":"Accueil",
+    "change-log":"Change log",
+    "tag": "Tags",
+    "analysis":"Analyses",
+    "algorithm":"Algorithmes",
+    "admin":"Admin",
+    "update-password":"Modifier son mot de passe",
+    "logout":"Logout"
+  },
   "home":{
-    "title":"Bienvenue {{name}}"
+    "title":"Bienvenue {{name}}",
+    "event" :{
+      "list":"Voici vos évènements en cours",
+      "join":"Rejoindre un évènement existant",
+      "create":"Créer un évènement"
+    }
   },
   "credential":{
     "title":"Crédentiels",
     "class":{
-      "email":"Email",
+      "login":"Email",
       "password":"Mot de passe"
     }
   },
@@ -46,27 +105,41 @@
         }
     },
     "class":{
+      "creator":"Créateur",
+      "title":"Titre",
       "type":"Type",
       "token":"Token",
       "statu":"Statu",
       "dateCreate":"Date de création",
       "dateRegisterClose":"Date de fin d'inscription",
-      "dateEvent":"Date d'évènement",
-      "participants":"Participants",
-      "drawResult":"Résultat des tirages"
+      "dateEvent":"Date de l'évènement",
+      "participants":{
+        "default":"Participant",
+        "variant":{
+          "params":["pluriel"],
+          "variantLines":[
+          {
+            "value":"Participants",
+            "params":{"pluriel":true}
+          }
+          ]
+        }
+      },
+      "drawResult":"Résultat des tirages",
+      "description":"Description",
+      "budget":"Budget"
     },
-    "list":{
-      "title":"Events List"
-    },
-    "new":{
-      "title":"Create event"
+    "statut":{
+      "registering":"En attente de participants",
+      "waiting_draft":"En attente du tirage au sort",
+      "running":"En cours",
+      "finished":"Terminé"
     },
     "join":{
-      "title":"Join event"
+      "title":"Rejoindre un évènement",
+      "subtitle":"Entrez le token que votre ami vous a communiqué dans le champ ci-dessous puis cliquez sur rejoindre. Si tu es dyslexique ce n'est pas de ma faute. "
     },
-    "remove":{
-      "title":"Leave an event"
-    }
+    "view":"Accéder"
   },
   "user":{
     "title": {

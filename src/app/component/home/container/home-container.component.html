@@ -1,1 +1,8 @@
-<p>home-container works!</p>
+<ng-container *ngIf="events$ | async as events;else loading">
+  <app-home [userName]="currentUser ? currentUser.firstName+' '+currentUser.lastName:''" [events]="events"
+    (emitOnJoinEvent)="onJoinEvent()" (emitOnCreateEvent)="onCreateEvent()"></app-home>
+</ng-container>
+
+<ng-template #loading>
+  <app-spinner></app-spinner>
+</ng-template>

@@ -1,1 +1,60 @@
-<p>event-view works!</p>
+<div class="w-100 centered">
+  <mat-card class="card centered container marged">
+    <mat-card-header class="centered">
+      <mat-card-title>{{event.title}}</mat-card-title>
+      <mat-card-subtitle>{{'statut.'+event.statut | trad:i18nEvent.NAMESPACE| async }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="w-100">
+      <div class="container-info marged">
+        <button *ngIf="isEventOfCurrentUser" mat-icon-button type="button"
+          (click)="OnUpdateEvent()"><mat-icon>{{IconEnum.UPDATE}}</mat-icon></button>
+        <p>{{i18nEvent.CREATOR | trad : i18nEvent.NAMESPACE_CLASS | async}} : {{event.creator.firstName + '
+          '+event.creator.lastName}}</p>
+        <p> {{i18nEvent.DATE_EVENT| trad : i18nEvent.NAMESPACE_CLASS| async }} : {{event.dateEvent | date}}</p>
+        <p> {{i18nEvent.BUDGET| trad : i18nEvent.NAMESPACE_CLASS | async }} : {{event.budget}}</p>
+        <p> {{event.participants.length}} {{i18nEvent.PARTICIPANTS |
+          trad:i18nEvent.NAMESPACE_CLASS:{pluriel:event.participants.length>1} |
+          async }}</p>
+      </div>
+      <!-- Info -->
+      <ng-container *ngFor="let participant of event.participants">
+        <ul>
+          <li>{{participant.firstName+' '+participant.lastName}}</li>
+        </ul>
+      </ng-container>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <ng-container class="actions" [ngSwitch]="event.statut">
+        <div class="actions" *ngSwitchCase="EventStatuEnum.REGISTERING">
+          <button mat-button [disabled]="true">Découvrir sur qui je suis tombé</button>
+        </div>
+        <div class="actions" *ngSwitchCase="EventStatuEnum.WAITING_DRAFT">
+          <button mat-button [disabled]="true">Découvrir sur qui je suis tombé</button>
+        </div>
+
+        <div class="actions" *ngSwitchCase="EventStatuEnum.RUNNING">
+          <ng-container *ngIf="isGiverDisplayed; else giverNotDisplayed">
+            <button mat-button (click)="onUpdateDisplayGiver()" [disabled]="false">Cacher
+              l'information
+            </button>
+            <p>Vous êtes tombé sur {{ userGiver.firstName+' '+userGiver.lastName }}</p>
+          </ng-container>
+
+          <ng-template #giverNotDisplayed>
+            <button mat-button *ngIf="!isGiverDisplayed" (click)="onUpdateDisplayGiver()" [disabled]="false">Découvrir
+              sur
+              qui je suis
+              tombé</button>
+          </ng-template>
+        </div>
+
+        <div class="actions" *ngSwitchCase="EventStatuEnum.FINISHED">
+          <p>Vous étiez tombé sur {{ userGiver.firstName+' '+userGiver.lastName }}</p>
+        </div>
+
+      </ng-container>
+
+    </mat-card-actions>
+  </mat-card>
+</div>
