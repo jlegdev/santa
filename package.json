@@ -22,6 +22,8 @@
     "@angular/router": "^16.1.8",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "firebase": "^10.7.1",
+    "firebase-tools": "^13.0.1",
     "material-design-icons": "^3.0.1",
     "rxjs": "~7.4.0",
     "subsink": "^1.0.2",
