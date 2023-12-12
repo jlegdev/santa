@@ -10,6 +10,7 @@ export enum IconEnum {
 	CREATE = 'create',
 	DELETE = 'delete',
 	DETAIL = 'zoom_in',
+	DRAFT = 'casino',
 	EDIT = 'edit',
 	EYE_CLOSE = 'visibility_off',
 	EYE_OPEN = 'visibility',

@@ -127,6 +127,11 @@ mat-card {
   cursor: pointer;
 }
 
+button {
+  :not(.disabled){
+    cursor: pointer;
+  }
+}
 .error {
   color: red;
 }

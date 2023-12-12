@@ -123,4 +123,18 @@ export class UtilsService {
 	public getPromiseFromBooleanValue<T>(value: T): Promise<T> {
 		return firstValueFrom(of(value));
 	}
+
+	public getRandomNumber(max: number): number {
+		const random: number = Math.random();
+		const randomNumber: number = Math.floor(random * (max + 1));
+		return randomNumber;
+	}
+
+	public removeValueFromArray<T>(value: T, table: Array<T>): Array<T> {
+		const index = table.indexOf(value); // Get the index of the value
+		if (index !== -1) {
+			table.splice(index, 1); // Remove one element starting from the index
+		}
+		return table;
+	}
 }

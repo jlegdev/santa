@@ -1,26 +1,30 @@
 {
   "general":{
     "button":{
-      "confirm.create":"Yes, create it",
-      "confirm.delete":"Yes, delete it",
-      "confirm.edit":"Yes, update it",
-      "cancel.create":"Cancel",
-      "cancel.delete":"No",
-      "cancel.edit":"Cancel",
-      "close":"Close",
-      "edit":"Edit",
-      "add":"Add",
-      "delete":"Delete",
-      "cancel":"Cancel",
-      "join":"Join ! ",
-      "go-back":"Go back",
-      "validate":"Validate",
-      "back":"Back",
-      "reset":"Reset",
-      "next":"Next",
-      "upload-file":"Upload files",
-      "login":"Login",
-      "see":"See"
+      "add": "Add",
+      "back": "Back",
+      "cancel": "Cancel",
+      "cancel.create": "Cancel",
+      "cancel.delete": "No",
+      "cancel.edit": "Cancel",
+      "close": "Close",
+      "confirm.create": "Yes, create it",
+      "confirm.delete": "Yes, delete it",
+      "confirm.edit": "Yes, update it",
+      "create": "Create !",
+      "delete": "Delete",
+      "draw":"Launch the draw",
+      "draw-again":"Launch again the draf",
+      "edit": "Edit",
+      "go-back": "Go back",
+      "join": "Join !",
+      "login": "Login",
+      "next": "Next",
+      "reset": "Reset",
+      "see": "See",
+      "upload-file": "Upload files",
+      "update":"Update information",
+      "validate": "Validate"
     },
     "request":{
       "post":{
@@ -75,6 +79,22 @@
     "update-password":"Update password",
     "logout":"Logout"
   },
+    "validator":{
+      "noMatchObject":"Choose element from the list",
+      "required":"This field is required",
+      "min":"Only numbers tallest than {{min}} are allowed",
+      "max":"Only numbers smallest than {{max}} are allowed",
+      "pattern":{
+        "positive-number":"Only positive numbers are allowed",
+        "numberRegEx":"Only numbers are allowed",
+        "number-positif-no-zero":"Only numbers more than zero are allowed",
+        "double-regex":"Only float are allowed",
+        "number":"Only numbers are allowed",
+        "event-token":"Le format du token est incorrect. Le format est ...",
+        "size-maximum":"{{number}} caractéres maximum",
+        "size-minimum":"{{number}} caractéres minimum"
+      }
+    },
   "home":{
     "title":"Welcome {{name}}",
     "event":{
@@ -89,6 +109,25 @@
       "login":"Email",
       "password":"Password"
     }
+  },
+  "drawResult":{
+    "title": {
+        "default":"Draw",
+          "variant":{
+            "params":["pluriel"],
+            "variantLines":[
+            {
+              "value":"Draws",
+              "params":{"pluriel":true}
+            }
+            ]
+          }
+      },
+      "class":{
+        "dateDraft":"Date of draw",
+        "isActive":"Current draw",
+        "relations":"Draw results"
+      }
   },
   "event":{
     "title": {
@@ -108,7 +147,30 @@
       "title":"Title",
       "type":"Type",
       "token":"Token",
-      "statu":"Statu",
+      "statu":{
+        "default":"Statu",
+        "variant":{
+          "params":["value"],
+          "variantLines":[
+            {
+              "value":"Waiting for participants to join",
+              "params":{"value":"registering"}
+            },
+            {
+              "value":"Waiting for the draw",
+              "params":{"value":"waiting_draw"}
+            },
+            {
+              "value":"Running",
+              "params":{"value":"running"}
+            },
+            {
+              "value":"Finished",
+              "params":{"value":"finished"}
+            }
+          ]
+        }
+      },
       "dateCreate":"Created date",
       "dateRegisterClose":"Closing register date",
       "dateEvent":"Event date",
@@ -128,17 +190,26 @@
       "description":"Description",
       "budget":"Budget"
     },
-    "statut":{
-      "registering":"waiting for participants to join",
-      "waiting_draft":"Waiting for the draw",
-      "running":"Running",
-      "finished":"Finished"
-    },
     "join":{
       "title":"Join an event",
       "subtitle":"Enter the token that your friend has given you in the field below, then click on join button. If you are dyslexic, it's not my fault"
     },
-    "view":"View event details"
+    "new":{
+      "title":"Create an event",
+      "subtitle":"Enter the Secret Santa's information"
+    },
+    "view-card":{
+      "view":"View event details"
+    },
+    "view" : {
+      "current-owner":"You are the creator of this event",
+      "draw":{
+        "dialog":{
+          "title":"Draft",
+          "content":"Do you confirm the running of draw ?"
+        }
+      }
+    }
   },
   "user":{
     "title": {

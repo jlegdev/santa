@@ -1,12 +1,14 @@
 .container{
-  width:90%
+  width:95%
 }
 
-.container-info{
-  width: 100%;
+
+
+.container-button{
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5px;
 }
 
 .actions {
@@ -14,4 +16,22 @@
   flex-direction: column;
   justify-content: center;
   width: 100%;
+}
+.rotating-icon {
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.container-accordion{
+  width: 100%;
+  margin-top: 20px;
 }

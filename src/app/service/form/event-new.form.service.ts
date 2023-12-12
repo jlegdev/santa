@@ -13,10 +13,10 @@ export class EventNewFormService {
 
 	private _initForm(): FormGroup {
 		const form: FormGroup = this.formBuilder.group({
-			token: new FormControl(null, [Validators.required, Validators.pattern(RegexPatternEnum.EVENT_TOKEN)]),
-			// type: new FormControl([null, [Validators.required]]),
-			dateRegisterClose: new FormControl(null, [Validators.required]),
+			title: new FormControl(null, [Validators.required, Validators.pattern(RegexPatternEnum.EVENT_TITLE)]),
+			description: new FormControl(null, [Validators.pattern(RegexPatternEnum.EVENT_DESCRIPTION)]),
 			dateEvent: new FormControl(null, [Validators.required]),
+			budget: new FormControl(null, [Validators.required, Validators.pattern(RegexPatternEnum.NUMBER_POSITIF)]),
 		});
 		return form;
 	}

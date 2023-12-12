@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { EventFinishedMock, EventRegisteringMock, EventRunningMock, EventWaitinggMock, SantaEvent } from 'src/app/model/santa-event.model';
+import {
+	EventFinishedMock,
+	EventRegisteringMock,
+	EventRunningMock,
+	EventWaitinggMock,
+	SantaEvent,
+	SantaEventBasic,
+} from 'src/app/model/santa-event.model';
 
 @Injectable({
 	providedIn: 'root',
@@ -9,7 +16,10 @@ export class EventMockService {
 	constructor() {}
 
 	public getOneEvent(id: string): Observable<SantaEvent> {
-		return of(EventRunningMock);
+		return of(
+			[EventRegisteringMock, EventWaitinggMock, EventRunningMock, EventFinishedMock].find((event: SantaEvent) => event.id == id) ??
+				EventRegisteringMock
+		);
 	}
 
 	public getEvents(): Observable<SantaEvent[]> {
@@ -25,8 +35,8 @@ export class EventMockService {
 		]);
 	}
 
-	public createEvent(event: SantaEvent): Observable<string> {
-		return of(event.id);
+	public createEvent(event: SantaEventBasic): Observable<string> {
+		return of(EventRegisteringMock.id);
 	}
 
 	public updateEvent(event: Partial<SantaEvent>, eventId: string): Observable<string> {

@@ -1,0 +1,14 @@
+.container-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  & div {
+    margin: 0px 5px;
+  }
+}
+
+
+.container-global {
+  padding: 20%;
+}

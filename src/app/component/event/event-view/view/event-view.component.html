@@ -1,48 +1,84 @@
 <div class="w-100 centered">
   <mat-card class="card centered container marged">
     <mat-card-header class="centered">
-      <mat-card-title>{{event.title}}</mat-card-title>
-      <mat-card-subtitle>{{'statut.'+event.statut | trad:i18nEvent.NAMESPACE| async }}</mat-card-subtitle>
+      <div class="centered">
+        <mat-card-title>{{event.title}}</mat-card-title>
+        <mat-card-subtitle *ngIf="isEventOfCurrentUser">{{'current-owner' | trad:i18nNamespace| async
+          }}</mat-card-subtitle>
+        <mat-card-subtitle>{{i18nEvent.STATU| trad:i18nEvent.NAMESPACE_CLASS:{value:event.statut}| async
+          }}</mat-card-subtitle>
+      </div>
     </mat-card-header>
     <mat-card-content class="w-100">
-      <div class="container-info marged">
-        <button *ngIf="isEventOfCurrentUser" mat-icon-button type="button"
-          (click)="OnUpdateEvent()"><mat-icon>{{IconEnum.UPDATE}}</mat-icon></button>
-        <p>{{i18nEvent.CREATOR | trad : i18nEvent.NAMESPACE_CLASS | async}} : {{event.creator.firstName + '
-          '+event.creator.lastName}}</p>
-        <p> {{i18nEvent.DATE_EVENT| trad : i18nEvent.NAMESPACE_CLASS| async }} : {{event.dateEvent | date}}</p>
-        <p> {{i18nEvent.BUDGET| trad : i18nEvent.NAMESPACE_CLASS | async }} : {{event.budget}}</p>
-        <p> {{event.participants.length}} {{i18nEvent.PARTICIPANTS |
-          trad:i18nEvent.NAMESPACE_CLASS:{pluriel:event.participants.length>1} |
-          async }}</p>
+      <div class="container-content marged centered">
+
+        <div class="container-button">
+          <button *ngIf="isEventOfCurrentUser" (click)="OnUpdateEvent()" mat-raised-button color="primary">
+            <mat-icon>{{IconEnum.EDIT}}</mat-icon>
+            {{'update' | trad:i18nNamespaceButton | async}}
+          </button>
+
+          <button *ngIf="isEventOfCurrentUser" (click)="onLaunchDraft()" mat-raised-button color="primary">
+            <mat-icon class="rotating-icon">{{IconEnum.DRAFT}}</mat-icon>
+            {{(event.drawResultActive ? 'draw-again' : 'draw') | trad:i18nNamespaceButton | async}}
+          </button>
+        </div>
+
+
+        <div class="container-accordion">
+          <mat-accordion [multi]="true">
+            <mat-expansion-panel [expanded]="true">
+              <mat-expansion-panel-header>
+                <mat-panel-title>Informations</mat-panel-title>
+              </mat-expansion-panel-header>
+              <ng-template matExpansionPanelContent>
+                <app-event-information [event]="event"></app-event-information>
+              </ng-template>
+            </mat-expansion-panel>
+            <mat-expansion-panel *ngIf="isEventOfCurrentUser && event.drawResultActive">
+              <mat-expansion-panel-header>
+                <mat-panel-title>{{i18nEvent.DRAW_RESULT| trad : i18nEvent.NAMESPACE_CLASS| async}}</mat-panel-title>
+              </mat-expansion-panel-header>
+              <ng-template matExpansionPanelContent>
+
+                <ng-container *ngIf="isResultActiveDrawDisplayed;else resultDrawNotDisplayed">
+                  <button mat-raised-button (click)="onUpdateDisplayDraw(false)">Cacher le résultat du tirage au
+                    sort</button>
+                  <app-draw-detail [draw]="event.drawResultActive"> </app-draw-detail>
+                </ng-container>
+
+                <ng-template #resultDrawNotDisplayed>
+                  <button mat-raised-button (click)="onUpdateDisplayDraw(true)">Afficher le résultat du tirage au
+                    sort</button>
+                </ng-template>
+              </ng-template>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+        <!-- Info -->
       </div>
-      <!-- Info -->
-      <ng-container *ngFor="let participant of event.participants">
-        <ul>
-          <li>{{participant.firstName+' '+participant.lastName}}</li>
-        </ul>
-      </ng-container>
     </mat-card-content>
 
     <mat-card-actions>
       <ng-container class="actions" [ngSwitch]="event.statut">
         <div class="actions" *ngSwitchCase="EventStatuEnum.REGISTERING">
-          <button mat-button [disabled]="true">Découvrir sur qui je suis tombé</button>
+          <button mat-raised-button [disabled]="true">Découvrir sur qui je suis tombé</button>
         </div>
         <div class="actions" *ngSwitchCase="EventStatuEnum.WAITING_DRAFT">
-          <button mat-button [disabled]="true">Découvrir sur qui je suis tombé</button>
+          <button mat-raised-button [disabled]="true">Découvrir sur qui je suis tombé</button>
         </div>
 
         <div class="actions" *ngSwitchCase="EventStatuEnum.RUNNING">
           <ng-container *ngIf="isGiverDisplayed; else giverNotDisplayed">
-            <button mat-button (click)="onUpdateDisplayGiver()" [disabled]="false">Cacher
+            <button mat-raised-button (click)="onUpdateDisplayGiver()" [disabled]="false">Cacher
               l'information
             </button>
             <p>Vous êtes tombé sur {{ userGiver.firstName+' '+userGiver.lastName }}</p>
           </ng-container>
 
           <ng-template #giverNotDisplayed>
-            <button mat-button *ngIf="!isGiverDisplayed" (click)="onUpdateDisplayGiver()" [disabled]="false">Découvrir
+            <button mat-raised-button *ngIf="!isGiverDisplayed" (click)="onUpdateDisplayGiver()"
+              [disabled]="false">Découvrir
               sur
               qui je suis
               tombé</button>

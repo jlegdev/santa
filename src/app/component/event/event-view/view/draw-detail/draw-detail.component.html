@@ -1,0 +1,6 @@
+<p>{{i18nDraw.DATE_DRAFT | trad : i18nDraw.NAMESPACE_CLASS | async}} : {{draw.dateDraft | date}}</p>
+<ng-container *ngFor="let relation of draw.relations">
+  <ul>
+    <li>{{relation.giver | people | async}} => {{relation.receiver | people | async}}</li>
+  </ul>
+</ng-container>

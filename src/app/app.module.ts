@@ -21,6 +21,7 @@ import { NavbarModule } from './component/core/navbar/navbar.module';
 import { EventModule } from './component/event/event.module';
 import { HomeModule } from './component/home/home.module';
 import { LoginModule } from './component/login/login.module';
+import { TradPipeModule } from './pipe/trad.module';
 import { AuthService } from './service/api/auth.service';
 import { EventService } from './service/api/event.service';
 import { AuthMockService } from './service/api/mock/auth.mock.service';
@@ -29,7 +30,6 @@ import { UserMockService } from './service/api/mock/user.mock.service';
 import { UserService } from './service/api/user.service';
 import { TradService } from './service/trad.service';
 import { SpinnerModule } from './shared/components/ui/spinner/spinner/spinner.module';
-import { TradPipeModule } from './shared/trad.module';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {

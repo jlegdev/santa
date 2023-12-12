@@ -1,0 +1,17 @@
+<div class="container-information">
+  <!-- <button *ngIf="isEventOfCurrentUser" mat-icon-button type="button" (click)="OnUpdateEvent()">update</button> -->
+  <p>{{i18nEvent.CREATOR | trad : i18nEvent.NAMESPACE_CLASS | async}} : {{event.creator.firstName + '
+    '+event.creator.lastName}}</p>
+  <p> {{i18nEvent.DATE_EVENT| trad : i18nEvent.NAMESPACE_CLASS| async }} : {{event.dateEvent | date}}
+  </p>
+  <p> {{i18nEvent.BUDGET| trad : i18nEvent.NAMESPACE_CLASS | async }} : {{event.budget |
+    currency:'EUR'}}</p>
+  <p> {{event.participants.length}} {{i18nEvent.PARTICIPANTS |
+    trad:i18nEvent.NAMESPACE_CLASS:{pluriel:event.participants.length>1} |
+    async }}</p>
+  <ng-container *ngFor="let participant of event.participants">
+    <ul>
+      <li>{{participant.firstName+' '+participant.lastName}}</li>
+    </ul>
+  </ng-container>
+</div>

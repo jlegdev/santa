@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ConfirmCancelComponent } from '../confirm-cancel/confirm-cancel.component';
+import { ConfirmActionComponent } from './confirm-action.component';
 
 const MaterialModules: any[] = [MatDialogModule];
 @NgModule({
-	declarations: [ConfirmCancelComponent],
+	declarations: [ConfirmActionComponent],
 	imports: [CommonModule, MaterialModules],
-	exports: [ConfirmCancelComponent],
+	exports: [ConfirmActionComponent],
 })
-export class ConfirmDeleteModule {}
+export class ConfirmActionModule {}

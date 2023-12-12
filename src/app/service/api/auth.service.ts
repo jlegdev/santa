@@ -16,17 +16,14 @@ export class AuthService implements IAuthService {
 	ngOnDestroy() {}
 
 	public isLoggedIn(): Promise<boolean> {
-		console.log('');
 		return new Promise<boolean>((resolve, reject) => resolve(true));
 	}
 
 	public login(credential: Credentials): Observable<boolean> {
-		console.log('auth service');
 		return of(true);
 	}
 
 	public logout(): Promise<boolean> {
-		console.log('');
 		return new Promise<boolean>((resolve, reject) => resolve(true));
 	}
 

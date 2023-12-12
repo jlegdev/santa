@@ -32,7 +32,7 @@ export class HomeContainerComponent implements OnInit {
 	}
 
 	public onCreateEvent(): void {
-		console.log('on create event');
+		this.routingService.navigate(RoutePathEnum.EVENT_CREATE);
 	}
 
 	public onJoinEvent(): void {

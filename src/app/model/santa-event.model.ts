@@ -1,24 +1,27 @@
 import { EventStatuEnum } from '../enum/event.status.enum';
 import { EventTypeEnum } from '../enum/event.type.enum';
-import { DrawResult, DrawResult1, DrawResult2 } from './draft.model';
-import { User, UserMock1, UserMock2 } from './user.model';
+import { DrawResult, DrawResult1, DrawResult2 } from './draw.model';
+import { User, UserMock1, UserMock2, UserMock3, UserMock4, UserMock5, UserMock6 } from './user.model';
 
 // Modèle pour représenter un événement
-export interface SantaEvent {
-	id: string;
-	creator: User;
+export interface SantaEventBasic {
 	title: string;
 	description?: string;
 	budget: number;
 	type: EventTypeEnum;
-	token: string;
 	statut: EventStatuEnum;
-	dateCreate: Date;
 	dateRegisterClose: Date;
 	dateEvent: Date;
+}
+
+export interface SantaEvent extends SantaEventBasic {
+	id: string;
+	creator: User;
+	token: string;
+	dateCreate: Date;
 	participants: User[];
-	drawResultActive: DrawResult;
-	drawResult: DrawResult[];
+	drawResultActive?: DrawResult;
+	oldDrawResult?: DrawResult[];
 }
 
 export enum EventTrad {
@@ -49,10 +52,8 @@ export const EventRegisteringMock: SantaEvent = {
 	dateCreate: new Date(),
 	dateRegisterClose: new Date(),
 	dateEvent: new Date(),
-	participants: [UserMock1, UserMock2, UserMock1, UserMock2],
-	drawResultActive: DrawResult2,
-	drawResult: [DrawResult1, DrawResult2],
-	title: 'My Santa',
+	participants: [UserMock1, UserMock2, UserMock3, UserMock4, UserMock5, UserMock6],
+	title: 'Santa Registering',
 	description:
 		'The most famous secret santa he most famous secret santahe most famous secret santahe most famous secret santahe most famous secret santahe most famous secret santahe most famous secret santahe most famous secret santahe most famous secret santahe most famous secret santahe most famous secret santahe most famous secret santahe most famous secret santahe most famous secret santahe most famous secret santahe most famous secret santahe most famous secret santa',
 };
@@ -68,9 +69,9 @@ export const EventWaitinggMock: SantaEvent = {
 	dateRegisterClose: new Date(),
 	dateEvent: new Date(),
 	participants: [UserMock1, UserMock2],
-	drawResult: [DrawResult1, DrawResult2],
+	oldDrawResult: [DrawResult1, DrawResult2],
 	drawResultActive: DrawResult2,
-	title: 'My Santa',
+	title: 'Santa Wainting draw',
 	description: 'The most famous secret santa',
 };
 
@@ -85,9 +86,9 @@ export const EventRunningMock: SantaEvent = {
 	dateRegisterClose: new Date(),
 	dateEvent: new Date(),
 	participants: [UserMock1, UserMock2, UserMock1, UserMock2, UserMock1, UserMock2, UserMock1],
-	drawResult: [DrawResult1, DrawResult2],
+	oldDrawResult: [DrawResult1, DrawResult2],
 	drawResultActive: DrawResult2,
-	title: 'My Santa',
+	title: 'Santa Running',
 	description: 'The most famous secret santa',
 };
 export const EventFinishedMock: SantaEvent = {
@@ -101,8 +102,8 @@ export const EventFinishedMock: SantaEvent = {
 	dateRegisterClose: new Date(),
 	dateEvent: new Date(),
 	participants: [UserMock1, UserMock2],
-	drawResult: [DrawResult1, DrawResult2],
+	oldDrawResult: [DrawResult1, DrawResult2],
 	drawResultActive: DrawResult2,
-	title: 'My Santa',
+	title: 'Santa finished',
 	description: 'The most famous secret santa',
 };

@@ -1,7 +1,7 @@
 <div class="centered">
   <h1> {{'title' | trad:i18nHome:{name:userName} | async }}</h1>
   <button mat-button (click)="onJoinEvent()">{{'event.join' | trad:i18nHome| async}}</button>
-  <button mat-button (click)="onJoinEvent()" [disabled]="true">{{'event.create' | trad:i18nHome| async}}</button>
+  <button mat-button (click)="onCreateEvent()" [disabled]="false">{{'event.create' | trad:i18nHome| async}}</button>
   <h5>{{'event.list' | trad:i18nHome| async}}</h5>
 
   <div class="view-container">

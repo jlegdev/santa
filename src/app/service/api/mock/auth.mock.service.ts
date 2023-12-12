@@ -26,7 +26,6 @@ export class AuthMockService implements IAuthService {
 	}
 
 	public login(credential: Credentials): Observable<boolean> {
-		console.log('yes');
 		this.storageService.storeUser(UserMock1);
 		this.routingService.navigate(RoutePathEnum.HOME);
 		return of(true);

@@ -1,27 +1,31 @@
 {
   "general":{
     "button":{
-        "confirm.create":"Oui, le créer",
-        "confirm.delete":"Oui, le supprimer",
-        "confirm.edit":"Oui, l'éditer",
-        "cancel.create":"Annuler",
-        "cancel.delete":"Non",
-        "cancel.edit":"Annuler",
-        "edit":"Editer",
-        "close":"Fermer",
-        "join":"Rejoindre ! ",
-        "add":"Ajouter",
-        "change-status":"Changer le statut",
-        "cancel":"Annuler",
-        "go-back":"Retour arrière",
-        "delete":"Supprimer",
-        "validate":"Valider",
-        "back":"Retour arrière",
-        "reset":"Réinitialiser",
-        "next":"Suivant",
-        "upload-file":"Téléverser un fichier",
-        "login":"Connexion",
-        "see":"Voir"
+        "add": "Ajouter",
+        "back": "Retour arrière",
+        "cancel": "Annuler",
+        "cancel.create": "Annuler",
+        "cancel.delete": "Non",
+        "cancel.edit": "Annuler",
+        "change-status": "Changer le statut",
+        "close": "Fermer",
+        "confirm.create": "Oui, le créer",
+        "confirm.delete": "Oui, le supprimer",
+        "confirm.edit": "Oui, l'éditer",
+        "create": "Créer !",
+        "delete": "Supprimer",
+        "draw":"Lancer le tirage au sort",
+        "draw-again":"Relancer le tirage au sort",
+        "edit": "Editer",
+        "go-back": "Retour arrière",
+        "join": "Rejoindre !",
+        "login": "Connexion",
+        "next": "Suivant",
+        "reset": "Réinitialiser",
+        "see": "Voir",
+        "upload-file": "Téléverser un fichier",
+        "update":"Modifier les informations",
+        "validate": "Valider"
     },
     "request":{
       "post":{
@@ -64,6 +68,24 @@
       }
     }
   },
+  "validator":{
+    "noMatchObject":"Choisissez un élément dans la liste",
+    "required":"Ce champ est requis",
+    "validate":"valider",
+    "min":"Seul les nombres supérieurs à {{min}} sont autorisés",
+    "max":"Seul les nombres inférieurs à {{max}} sont autorisés",
+    "pattern":{
+      "number-positif":"Seul les nombres positifs sont autorisés",
+      "numberRegEx":"Seul les nombres sont autorisés",
+      "number-positif-no-zero":"Seul les nombres supérieurs à 0 sont autorisés",
+      "double-regex":"Seuls les nombres à virgules sont autorisés",
+      "number":"Seules les nombres sont autorisés",
+      "email":"Le format de l'email est incorrect",
+      "event-token":"Le format du token est incorrect. Le format est ...",
+      "size-maximum":"{{number}} caractéres maximum",
+      "size-minimum":"{{number}} caractéres minimum"
+    }
+  },
   "navbar":{
     "menu.user.account":"Compte",
     "menu.user.logout":"Se déconnecter",
@@ -91,6 +113,25 @@
       "password":"Mot de passe"
     }
   },
+  "drawResult":{
+    "title": {
+        "default":"Tirage au sort",
+          "variant":{
+            "params":["pluriel"],
+            "variantLines":[
+            {
+              "value":"Tirages au sort",
+              "params":{"pluriel":true}
+            }
+            ]
+          }
+      },
+      "class":{
+        "dateDraft":"Date du tirage",
+        "isActive":"Tirage au sort actuel",
+        "relations":"Résultat tirage"
+      }
+  },
   "event":{
     "title": {
       "default":"Évènement",
@@ -109,7 +150,30 @@
       "title":"Titre",
       "type":"Type",
       "token":"Token",
-      "statu":"Statu",
+      "statu":{
+        "default":"Statu",
+        "variant":{
+          "params":["value"],
+          "variantLines":[
+            {
+              "value":"En attente de participants",
+              "params":{"value":"registering"}
+            },
+            {
+              "value":"En attente du tirage au sort",
+              "params":{"value":"waiting_draw"}
+            },
+            {
+              "value":"En cours",
+              "params":{"value":"running"}
+            },
+            {
+              "value":"Terminé",
+              "params":{"value":"finished"}
+            }
+          ]
+        }
+      },
       "dateCreate":"Date de création",
       "dateRegisterClose":"Date de fin d'inscription",
       "dateEvent":"Date de l'évènement",
@@ -129,17 +193,26 @@
       "description":"Description",
       "budget":"Budget"
     },
-    "statut":{
-      "registering":"En attente de participants",
-      "waiting_draft":"En attente du tirage au sort",
-      "running":"En cours",
-      "finished":"Terminé"
-    },
     "join":{
       "title":"Rejoindre un évènement",
       "subtitle":"Entrez le token que votre ami vous a communiqué dans le champ ci-dessous puis cliquez sur rejoindre. Si tu es dyslexique ce n'est pas de ma faute. "
     },
-    "view":"Accéder"
+    "new":{
+      "title":"Créer un évènement",
+      "subtitle":"Entrez les informations de votre Secret Santa"
+    },
+    "view-card":{
+      "view":"Accéder"
+    },
+    "view" : {
+      "current-owner":"Vous êtes le créateur de cet évènement ",
+      "draw":{
+        "dialog":{
+          "title":"Tirage au sort",
+          "content":"Confirmez vous le lancement du tirage au sort ? "
+        }
+      }
+    }
   },
   "user":{
     "title": {

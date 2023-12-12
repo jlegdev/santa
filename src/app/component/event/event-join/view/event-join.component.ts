@@ -17,6 +17,7 @@ export class EventJoinComponent implements OnInit {
 	public form: FormGroup;
 
 	public readonly i18nEvent = EventTrad;
+	public readonly i18nNamespace: string = 'event.join';
 	public readonly LoadingState = LoadingState;
 	constructor(private eventJoinFormService: EventJoinFormService) {
 		this.form = this.eventJoinFormService.getForm();

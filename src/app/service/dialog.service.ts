@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable, first, map } from 'rxjs';
 import { StringPercentage } from '../model/custom-type';
-import { ConfirmCancelComponent } from '../shared/components/ui/dialog/confirm-cancel/confirm-cancel.component';
+import { ConfirmActionComponent } from '../shared/components/ui/dialog/confirm-action/confirm-action.component';
+import { ButtonActionTradEnum } from '../shared/enum/button-action-trad.enum';
 import { ThemeService } from './api/theme.service';
 
 export class DialogConfig {
@@ -44,10 +45,10 @@ export class DialogService {
 		return config;
 	}
 
-	public confirmClose(i18nNamespace: string): Observable<boolean> {
+	public openConfirmActionDialog(i18nNamespace: string, action: ButtonActionTradEnum): Observable<boolean> {
 		const config: DialogConfig = new DialogConfig();
-		config.data = { i18nNamespace: i18nNamespace };
-		let t = this.open(ConfirmCancelComponent, config);
+		config.data = { i18nNamespace: i18nNamespace, action: action };
+		let t = this.open(ConfirmActionComponent, config);
 
 		return t.afterClosed().pipe(
 			first(),

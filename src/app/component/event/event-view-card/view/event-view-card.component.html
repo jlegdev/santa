@@ -9,12 +9,12 @@
     <mat-card-content>
       <div class="w-100 centered">
         <p> Le {{event.dateEvent | date}}</p>
-        <p> {{'statut.'+event.statut | trad:i18nEvent | async }}</p>
+        <p> {{i18nEvent.STATU| trad:i18nEvent.NAMESPACE_CLASS:{value:event.statut}| async }}</p>
       </div>
     </mat-card-content>
     <mat-card-actions>
       <div class="actions">
-        <button mat-button (click)="onViewEvent(event.id,$event.which==2)">{{'view' | trad:i18nEvent|
+        <button mat-button (click)="onViewEvent(event.id,$event.which==2)">{{'view' | trad:i18nNamespace|
           async}}</button>
       </div>
     </mat-card-actions>

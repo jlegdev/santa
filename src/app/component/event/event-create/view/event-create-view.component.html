@@ -1,1 +1,38 @@
-<p>event-create-view works!</p>
+<div class="marged">
+  <mat-card>
+    <div class="centered marged ">
+      <mat-card-title>{{'title' | trad:i18nNamespace | async}}</mat-card-title>
+      <mat-card-subtitle>{{'subtitle' | trad:i18nNamespace | async}}</mat-card-subtitle>
+    </div>
+    <mat-card-content>
+      <form [formGroup]="form" class="centered-column">
+        <mat-form-field appearance="fill">
+          <mat-label>{{i18nEvent.TITLE | trad : i18nEvent.NAMESPACE_CLASS | async}}</mat-label>
+          <input matInput type="text" required [formControlName]="i18nEvent.TITLE">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>{{i18nEvent.DESCRIPTION | trad : i18nEvent.NAMESPACE_CLASS | async}}</mat-label>
+          <input matInput type="text" [formControlName]="i18nEvent.DESCRIPTION">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>{{i18nEvent.BUDGET | trad : i18nEvent.NAMESPACE_CLASS | async}}</mat-label>
+          <input matInput type="number" min="0" required [formControlName]="i18nEvent.BUDGET">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{i18nEvent.DATE_EVENT | trad : i18nEvent.NAMESPACE_CLASS |
+            async}}</mat-label>
+          <input matInput [matDatepicker]="picker" [formControlName]="i18nEvent.DATE_EVENT">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <app-confirm-button [text]="'create' | trad: 'general.button' | async" [isDisabled]="form.invalid"
+          [isLoading]="loadingState==LoadingState.LOADING" (emitKeyUpEnter)="onCreateClick()"
+          (emitClick)="onCreateClick()"></app-confirm-button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
