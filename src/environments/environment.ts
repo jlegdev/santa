@@ -9,48 +9,7 @@ export const environment: Environment = {
 	isMock: true,
 	apiUrl: 'http://localhost:5000/api',
 	apiVersion: 'v1',
-	api: {
-		algoVersion: {
-			url: 'algo_versions',
-		},
-		flight: {
-			url: 'flights',
-			getAllFuselages: 'flights/fuselages',
-			getOrigins: 'flights/origins',
-			getVersions: 'flights/versions',
-			getDroneTypes: 'flights/drone_types',
-			getCharacteristics: 'flights/characteristics',
-			addTags: 'flights/{id}/tags',
-			addTagsToFlights: 'flights/tags/add',
-			removeTagsToFlights: 'flights/tags/remove',
-			getDataFromFlights: 'flights/get-data-from-flights',
-			exportDataFromFlights: 'flights/get-data-from-flights/export',
-		},
-		tag: {
-			url: 'tags',
-			oneTag: 'tags/{id}',
-			getCharacteristicOfOne: 'tags/{id}/characteristics',
-			byGroup: 'tags/{id}',
-		},
-		authentication: {
-			url: 'token',
-		},
-		role: {
-			url: 'roles',
-			oneRole: 'roles/{id}',
-		},
-		token: {
-			refreshToken: 'refresh-token/',
-			deleteToken: 'logout/',
-		},
-		user: {
-			url: 'user',
-			oneUser: 'user/{id}',
-			getAll: 'users',
-			updateCredential: '/user/{id}/update-credential',
-			updateOwn: 'user/edit-own/{id}',
-		},
-	},
+	api: {},
 };
 
 /*

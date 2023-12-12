@@ -15,5 +15,6 @@ export const environment: EnvironmentProd = {
 	isMock: true,
 	apiUrl: 'test',
 	apiVersion: 'v1',
+	api: {},
 	firebase: firebaseConfig,
 };
