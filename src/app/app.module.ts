@@ -2,6 +2,8 @@ import { registerLocaleData } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
 import { APP_INITIALIZER, LOCALE_ID, NgModule, Provider } from '@angular/core';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -21,6 +23,7 @@ import { NavbarModule } from './component/core/navbar/navbar.module';
 import { EventModule } from './component/event/event.module';
 import { HomeModule } from './component/home/home.module';
 import { LoginModule } from './component/login/login.module';
+import { FirebaseConfig } from './model/environment.model';
 import { TradPipeModule } from './pipe/trad.module';
 import { AuthService } from './service/api/auth.service';
 import { EventService } from './service/api/event.service';
@@ -30,7 +33,6 @@ import { UserMockService } from './service/api/mock/user.mock.service';
 import { UserService } from './service/api/user.service';
 import { TradService } from './service/trad.service';
 import { SpinnerModule } from './shared/components/ui/spinner/spinner/spinner.module';
-
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
 	// Ici on précise la localisation des fichier de trad(2eme arg), et la terminaison de ceux ci(3eme arg)
@@ -64,6 +66,7 @@ const InternalModules: any[] = [
 ];
 const LazyModules: any[] = [HomeModule, LoginModule, EventModule];
 
+const prodModules: any[] = [provideFirebaseApp(() => initializeApp(environment.firebase as FirebaseConfig)), provideFirestore(() => getFirestore())];
 const providers: Provider[] = [
 	{ provide: LOCALE_ID, useValue: 'fr' },
 	// { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
@@ -88,7 +91,7 @@ const providers: Provider[] = [
 ];
 @NgModule({
 	declarations: [AppComponent, MainLayoutComponent],
-	imports: [AngularModules, InternalModules, MaterialModules, UIModules, LazyModules],
+	imports: [AngularModules, InternalModules, MaterialModules, UIModules, LazyModules, environment.firebase ? prodModules : []],
 	providers: [providers],
 	exports: [TradPipeModule],
 	bootstrap: [AppComponent],
