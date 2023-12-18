@@ -97,7 +97,7 @@ const providers: Provider[] = [
 ];
 @NgModule({
 	declarations: [AppComponent, MainLayoutComponent],
-	imports: [AngularModules, InternalModules, MaterialModules, UIModules, LazyModules, prodModules],
+	imports: [AngularModules, InternalModules, MaterialModules, UIModules, prodModules],
 	providers: [providers],
 	exports: [TradPipeModule],
 	bootstrap: [AppComponent],
