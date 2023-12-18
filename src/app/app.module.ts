@@ -3,7 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
 import { APP_INITIALIZER, LOCALE_ID, NgModule, Provider } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -65,7 +65,7 @@ const LazyModules: any[] = [HomeModule, LoginModule, RegisterModule, EventModule
 const prodModules: any[] = [
 	provideFirebaseApp(() => initializeApp(environment.firebase as FirebaseConfig)),
 	provideFirestore(() => getFirestore()),
-	AngularFireAuthModule,
+	provideAuth(() => getAuth()),
 ];
 
 // const mockProviders: Provider[] = [
