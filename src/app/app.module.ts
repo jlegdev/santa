@@ -97,7 +97,7 @@ const providers: Provider[] = [
 ];
 @NgModule({
 	declarations: [AppComponent, MainLayoutComponent],
-	imports: [AngularModules, InternalModules, MaterialModules, UIModules, LazyModules, environment.firebase ? prodModules : []],
+	imports: [AngularModules, InternalModules, MaterialModules, UIModules, LazyModules, prodModules],
 	providers: [providers],
 	exports: [TradPipeModule],
 	bootstrap: [AppComponent],
