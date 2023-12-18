@@ -27,9 +27,6 @@ import { LoginModule } from './component/login/login.module';
 import { RegisterModule } from './component/register/register.module';
 import { FirebaseConfig } from './model/environment.model';
 import { TradPipeModule } from './pipe/trad.module';
-import { AuthService } from './service/api/auth.service';
-import { EventService } from './service/api/event.service';
-import { UserService } from './service/api/user.service';
 import { TradService } from './service/trad.service';
 import { SpinnerModule } from './shared/components/ui/spinner/spinner/spinner.module';
 // AoT requires an exported function for factories
@@ -71,20 +68,20 @@ const prodModules: any[] = [
 	AngularFireAuthModule,
 ];
 
-const mockProviders: Provider[] = [
-	{
-		provide: AuthService,
-		useClass: AuthService,
-	},
-	{
-		provide: EventService,
-		useClass: EventService,
-	},
-	{
-		provide: UserService,
-		useClass: UserService,
-	},
-];
+// const mockProviders: Provider[] = [
+// 	{
+// 		provide: AuthService,
+// 		useClass: AuthService,
+// 	},
+// 	{
+// 		provide: EventService,
+// 		useClass: EventService,
+// 	},
+// 	{
+// 		provide: UserService,
+// 		useClass: UserService,
+// 	},
+// ];
 const providers: Provider[] = [
 	{ provide: LOCALE_ID, useValue: 'fr' },
 	// { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
@@ -98,7 +95,7 @@ const providers: Provider[] = [
 @NgModule({
 	declarations: [AppComponent, MainLayoutComponent],
 	imports: [AngularModules, InternalModules, MaterialModules, UIModules, prodModules, LazyModules],
-	providers: [providers, environment.isMock ? mockProviders : []],
+	providers: [providers],
 	exports: [TradPipeModule],
 	bootstrap: [AppComponent],
 })

@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
-
-import { User, UserCredential, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class FirebaseAuthService {
-	constructor() {}
+	constructor(private auth: AngularFireAuth) {}
 
 	public register(email: string, password: string): Promise<any> {
-		const auth: Auth = getAuth();
-		return createUserWithEmailAndPassword(auth, email, password)
-			.then((userCredential: UserCredential) => {
+		return this.auth
+			.createUserWithEmailAndPassword(email, password)
+			.then((userCredential) => {
 				// Signed up
 				const user = userCredential.user;
 				console.log(user);
@@ -27,9 +25,9 @@ export class FirebaseAuthService {
 	}
 
 	public login(email: string, password: string): Promise<any> {
-		const auth: Auth = getAuth();
-		return signInWithEmailAndPassword(auth, email, password)
-			.then((userCredential: UserCredential) => {
+		return this.auth
+			.signInWithEmailAndPassword(email, password)
+			.then((userCredential) => {
 				// Signed up
 				const user = userCredential.user;
 				console.log(user);
@@ -43,13 +41,11 @@ export class FirebaseAuthService {
 	}
 
 	public logout(): Promise<void> {
-		const auth: Auth = getAuth();
-		return auth.signOut();
+		return this.auth.signOut();
 	}
 
-	public getCurrentUser(): User | null {
-		const auth: Auth = getAuth();
-		return auth?.currentUser;
+	public getCurrentUser(): Promise<any> {
+		return this.auth.currentUser;
 	}
 
 	public isLoggedIn(): boolean {
