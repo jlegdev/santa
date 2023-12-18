@@ -1,30 +1,34 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { User, UserMock1, UserMock2 } from 'src/app/model/user.model';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/model/user.model';
+import { FirebaseService } from '../firebase.service';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class UserMockService {
-	constructor() {}
+	private _apiUrl: string = 'events';
+	constructor(private firebaseService: FirebaseService) {}
 
 	public getOneUser(id: string): Observable<User> {
-		return of(UserMock1);
+		const user$: Observable<User> = this.firebaseService.getOne<User>(this._apiUrl, id);
+		return user$;
 	}
 
 	public getUsers(): Observable<User[]> {
-		return of([UserMock1, UserMock2]);
+		const users$: Observable<User[]> = this.firebaseService.getAll<User>(this._apiUrl);
+		return users$;
 	}
 
 	public createUser(user: User): Observable<string> {
-		return of(user.id);
+		return this.firebaseService.create(this._apiUrl, user);
 	}
 
-	public updateUser(user: Partial<User>, userId: string): Observable<string> {
-		return of(userId);
+	public updateUser(user: Partial<User>, userId: string): Observable<void> {
+		return this.firebaseService.update(this._apiUrl, userId, user);
 	}
 
-	public deleteUser(userId: string): Observable<string> {
-		return of(userId);
+	public deleteUser(userId: string): Observable<void> {
+		return this.firebaseService.delete(this._apiUrl, userId);
 	}
 }
