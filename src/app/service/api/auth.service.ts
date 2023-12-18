@@ -15,6 +15,9 @@ export class AuthService implements IAuthService {
 
 	ngOnDestroy() {}
 
+	public register(credential: Credentials): any {
+		console.log(credential);
+	}
 	public isLoggedIn(): Promise<boolean> {
 		return new Promise<boolean>((resolve, reject) => resolve(true));
 	}

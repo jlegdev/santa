@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
 import { APP_INITIALIZER, LOCALE_ID, NgModule, Provider } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,6 +24,7 @@ import { NavbarModule } from './component/core/navbar/navbar.module';
 import { EventModule } from './component/event/event.module';
 import { HomeModule } from './component/home/home.module';
 import { LoginModule } from './component/login/login.module';
+import { RegisterModule } from './component/register/register.module';
 import { FirebaseConfig } from './model/environment.model';
 import { TradPipeModule } from './pipe/trad.module';
 import { AuthService } from './service/api/auth.service';
@@ -64,9 +66,13 @@ const InternalModules: any[] = [
 		// defaultLanguage: 'fr',
 	}),
 ];
-const LazyModules: any[] = [HomeModule, LoginModule, EventModule];
+const LazyModules: any[] = [HomeModule, LoginModule, RegisterModule, EventModule];
 
-const prodModules: any[] = [provideFirebaseApp(() => initializeApp(environment.firebase as FirebaseConfig)), provideFirestore(() => getFirestore())];
+const prodModules: any[] = [
+	provideFirebaseApp(() => initializeApp(environment.firebase as FirebaseConfig)),
+	provideFirestore(() => getFirestore()),
+	provideAuth(() => getAuth()),
+];
 const providers: Provider[] = [
 	{ provide: LOCALE_ID, useValue: 'fr' },
 	// { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },

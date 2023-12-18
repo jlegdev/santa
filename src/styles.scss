@@ -162,6 +162,9 @@ button {
   align-items: center;
 }
 
+.already{
+  color: green
+}
 // Buttons
 .buttons-action {
   display: flex;
@@ -170,7 +173,6 @@ button {
   margin-right: 5px !important;
   margin-bottom: 5px;
 }
-
 
 @keyframes spinner {
   to {

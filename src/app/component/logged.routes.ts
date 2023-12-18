@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { RoutePathEnum } from '../enum/route.path.enum';
+import { RoutePathEnum, RouteTitleMap } from '../enum/route.path.enum';
 import { EventCreateContainerComponent } from './event/event-create/container/event-create-container.component';
 import { EventJoinContainerComponent } from './event/event-join/container/event-join-container.component';
 import { EventListContainerComponent } from './event/event-list/container/event-list-container.component';
@@ -36,6 +36,6 @@ export const LoggedRoutes: Routes = [
 	{
 		path: '**',
 		component: HomeContainerComponent,
-		// title: RouteTitleMap.get(RoutePathEnum.HOME),
+		title: RouteTitleMap.get(RoutePathEnum.HOME),
 	},
 ];

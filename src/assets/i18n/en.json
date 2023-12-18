@@ -21,6 +21,7 @@
       "login": "Login",
       "next": "Next",
       "reset": "Reset",
+      "register":"Register",
       "see": "See",
       "upload-file": "Upload files",
       "update":"Update information",
@@ -103,12 +104,15 @@
       "create":"Create an event"
     }
   },
-  "credential":{
+  "login":{
     "title":"Credentials",
     "class":{
       "login":"Email",
       "password":"Password"
-    }
+    },
+    "success":"You are now login !",
+    "error":"An error occured : {{error}}",
+    "already":"Not yet registered ?"
   },
   "drawResult":{
     "title": {
@@ -210,6 +214,18 @@
         }
       }
     }
+  },
+  "register":{
+    "title":"Register",
+    "class":{
+      "firstName":"First name",
+      "lastName":"Last name",
+      "login":"Email",
+      "password":"Password"
+    },
+    "success":"You are now registered !",
+    "error":"An error occured : {{error}}",
+    "already":"Already registered ?"
   },
   "user":{
     "title": {

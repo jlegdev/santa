@@ -1,0 +1,35 @@
+<div class="fill centered-column main-container">
+  <div class="container">
+    <img alt="logo data hub" class="img" [src]="imgSrc">
+    <form [formGroup]="form" (ngSubmit)="onValid()" class="centered-column">
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{i18nRegister.FIRST_NAME | trad : i18nRegister.NAMESPACE_CLASS | async}}</mat-label>
+        <input matInput type="text" required [formControlName]="i18nRegister.FIRST_NAME">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{i18nRegister.LAST_NAME | trad : i18nRegister.NAMESPACE_CLASS | async}}</mat-label>
+        <input matInput type="text" required [formControlName]="i18nRegister.LAST_NAME">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{i18nRegister.LOGIN | trad : i18nRegister.NAMESPACE_CLASS | async}}</mat-label>
+        <input matInput type="text" required [formControlName]="i18nRegister.LOGIN">
+      </mat-form-field>
+
+      <span></span>
+      <mat-form-field appearance="fill">
+        <mat-label>{{i18nRegister.PASSWORD | trad : i18nRegister.NAMESPACE_CLASS | async}}</mat-label>
+        <input matInput required type="password" [formControlName]="i18nRegister.PASSWORD">
+      </mat-form-field>
+
+      <div class="centered-column">
+        <p class="already" (click)="goOnLoginPage()">{{'already' | trad:i18nNamespace | async}}</p>
+        <app-confirm-button [text]="'register' | trad: 'general.button' | async" [isDisabled]="form.invalid"
+          [isLoading]="isLoading" (emitKeyUpEnter)="onValid()"></app-confirm-button>
+      </div>
+    </form>
+  </div>
+</div>

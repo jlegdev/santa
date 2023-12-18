@@ -7,6 +7,7 @@ export interface IAuthService {
 	isLoggedIn(): Promise<boolean>;
 	logout(): any;
 	getCurrentUser(): User;
+	register(credential: Credentials): any;
 	// getToken(): Promise<string>;
 	// refreshToken(): Promise<string>;
 }

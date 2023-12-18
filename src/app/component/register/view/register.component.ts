@@ -2,16 +2,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ImgPathEnum } from 'src/app/enum/img.path.enum';
 import { LoadingState } from 'src/app/enum/loading-state.enum';
-import { CredentialTrad, Credentials } from 'src/app/model/credentials.model';
-import { LoginFormService } from 'src/app/service/form/login.form.service';
+import { Register, RegisterTrad } from 'src/app/model/credentials.model';
+import { RegisterFormService } from 'src/app/service/form/register-form.service';
 import { SubSink } from 'subsink';
 
 @Component({
-	selector: 'app-login',
-	templateUrl: './login.component.html',
-	styleUrls: ['./login.component.scss'],
+	selector: 'app-register',
+	templateUrl: './register.component.html',
+	styleUrls: ['./register.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 	@Input({ required: true })
 	public loadingState: LoadingState = LoadingState.INITIAL;
 
@@ -19,9 +19,10 @@ export class LoginComponent implements OnInit {
 	public isLoading: boolean = false;
 
 	@Output()
-	public emitCredentials: EventEmitter<Credentials> = new EventEmitter<Credentials>();
+	public emitRegister: EventEmitter<Register> = new EventEmitter<Register>();
+
 	@Output()
-	public emitGoOnRegisterPage: EventEmitter<boolean> = new EventEmitter<boolean>();
+	public emitGoOnLoginPage: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	public error: string = '';
 	public form: FormGroup;
@@ -29,11 +30,11 @@ export class LoginComponent implements OnInit {
 	private _subs: SubSink = new SubSink();
 	public readonly imgSrc: string = ImgPathEnum.LOGIN;
 
-	public readonly i18nCredential = CredentialTrad;
+	public readonly i18nRegister = RegisterTrad;
 	public readonly i18nNamespace: string = 'login';
 
-	constructor(private loginFormService: LoginFormService) {
-		this.form = this.loginFormService.getForm();
+	constructor(private registerFormService: RegisterFormService) {
+		this.form = this.registerFormService.getForm();
 	}
 
 	ngOnInit(): void {}
@@ -48,11 +49,11 @@ export class LoginComponent implements OnInit {
 		if (this.form?.invalid) {
 			return;
 		}
-		const credential: Credentials = this.form.value as Credentials;
-		this.emitCredentials.emit(credential);
+		const register: Register = this.form.value as Register;
+		this.emitRegister.emit(register);
 	}
 
-	public goOnRegisterPage(): void {
-		this.emitGoOnRegisterPage.emit(true);
+	public goOnLoginPage(): void {
+		this.emitGoOnLoginPage.emit(true);
 	}
 }

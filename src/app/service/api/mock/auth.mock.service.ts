@@ -1,34 +1,48 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { RoutePathEnum } from 'src/app/enum/route.path.enum';
 import { Credentials } from 'src/app/model/credentials.model';
-import { User, UserMock1 } from 'src/app/model/user.model';
+import { User } from 'src/app/model/user.model';
 import { NotifService } from '../../utils/notif.service';
 import { RoutingService } from '../../utils/routing.service';
 import { StorageService } from '../../utils/storage.service';
+import { FirebaseAuthService } from '../firebase-auth.service';
 import { IAuthService } from '../iauth.service';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AuthMockService implements IAuthService {
-	constructor(private notifService: NotifService, private storageService: StorageService, private routingService: RoutingService) {}
+	constructor(
+		private notifService: NotifService,
+		private storageService: StorageService,
+		private routingService: RoutingService,
+		private firebaseAuthService: FirebaseAuthService
+	) {}
+
+	public register(credential: Credentials): Promise<any> {
+		return this.firebaseAuthService.register(credential.login, credential.password).then((value) => console.log(value));
+	}
 
 	public isLoggedIn(): Promise<boolean> {
-		return new Promise<boolean>((resolve, reject) => {
-			const user: User | undefined = this.storageService.getUser();
-			if (user) {
-				resolve(true);
-			} else {
-				resolve(false);
-			}
-		});
+		return new Promise((resolve) => resolve(this.firebaseAuthService.isLoggedIn()));
 	}
 
 	public login(credential: Credentials): Observable<boolean> {
-		this.storageService.storeUser(UserMock1);
-		this.routingService.navigate(RoutePathEnum.HOME);
-		return of(true);
+		return from(
+			this.firebaseAuthService
+				.login(credential.login, credential.password)
+				.then(() => {
+					console.log(this.firebaseAuthService.getCurrentUser());
+					// this.storageService.storeUser();
+					// this.routingService.navigate(RoutePathEnum.HOME);
+					return true;
+				})
+				.catch((error) => {
+					console.log(error);
+					return false;
+				})
+		);
 	}
 
 	public logout(): Promise<boolean> {
