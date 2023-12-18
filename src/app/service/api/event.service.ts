@@ -61,8 +61,8 @@ export class EventService {
 		return this.firebaseService.delete(this._apiUrl, eventId);
 	}
 
-	public joinEvent(eventToken: string) {
-		this.getOneEventByToken(eventToken).pipe(
+	public joinEvent(eventToken: string): Observable<string> {
+		return this.getOneEventByToken(eventToken).pipe(
 			concatMap((event: SantaEvent) => {
 				const currentUser: UserModel = this.authService.getCurrentUser();
 				const userIsAlreadyParticipatingError: boolean = event.participants.some((participant: UserModel) => participant.id == currentUser.id);
@@ -71,7 +71,12 @@ export class EventService {
 				} else {
 					event.participants.push(currentUser);
 					currentUser.eventsId?.push(event.id);
-					return this.updateEvent(event, event.id).pipe(concatMap((result: void) => this.userMockService.updateUser(currentUser, currentUser.id)));
+					return this.userMockService.updateUser(currentUser, currentUser.id).pipe(
+						concatMap((result: string) => {
+							this.updateEvent(event, event.id);
+							return event.id;
+						})
+					);
 				}
 			})
 		);

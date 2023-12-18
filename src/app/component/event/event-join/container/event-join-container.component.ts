@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingState } from 'src/app/enum/loading-state.enum';
 import { RoutePathEnum } from 'src/app/enum/route.path.enum';
-import { SantaEvent } from 'src/app/model/santa-event.model';
 import { EventService } from 'src/app/service/api/event.service';
 import { RoutingService } from 'src/app/service/utils/routing.service';
 import { UtilsService } from 'src/app/service/utils/utils.service';
@@ -20,8 +19,8 @@ export class EventJoinContainerComponent implements OnInit {
 	public onJoin(eventToken: string): void {
 		this.loading = LoadingState.LOADING;
 		this.eventService.joinEvent(eventToken).subscribe({
-			next: (event: SantaEvent) => {
-				const url: string = this.utilsService.formatURLString(RoutePathEnum.EVENT_VIEW, event.id);
+			next: (eventId: string) => {
+				const url: string = this.utilsService.formatURLString(RoutePathEnum.EVENT_VIEW, eventId);
 				this.routingService.navigate(url);
 				this.loading = LoadingState.LOADED;
 			},
