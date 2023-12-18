@@ -1,4 +1,4 @@
-export interface User {
+export interface UserModel {
 	id: string;
 	firstName: string;
 	lastName: string;
@@ -20,7 +20,7 @@ export enum UserTrad {
 	EVENTS_ID = 'eventsId',
 }
 
-export const UserMock1: User = {
+export const UserMock1: UserModel = {
 	id: '1',
 	firstName: 'John',
 	lastName: 'Doe',
@@ -30,7 +30,7 @@ export const UserMock1: User = {
 	eventsId: ['1'],
 };
 
-export const UserMock2: User = {
+export const UserMock2: UserModel = {
 	id: '2',
 	firstName: 'Martin',
 	lastName: 'Dupont',
@@ -40,7 +40,7 @@ export const UserMock2: User = {
 	eventsId: ['1'],
 };
 
-export const UserMock3: User = {
+export const UserMock3: UserModel = {
 	id: '3',
 	firstName: 'Jean',
 	lastName: 'Dubois',
@@ -49,7 +49,7 @@ export const UserMock3: User = {
 	profilePicture: null,
 	eventsId: ['1'],
 };
-export const UserMock4: User = {
+export const UserMock4: UserModel = {
 	id: '4',
 	firstName: 'Pierre',
 	lastName: 'Lefebvre',
@@ -58,7 +58,7 @@ export const UserMock4: User = {
 	profilePicture: null,
 	eventsId: ['1'],
 };
-export const UserMock5: User = {
+export const UserMock5: UserModel = {
 	id: '5',
 	firstName: 'Hugo ',
 	lastName: 'Moreau',
@@ -67,7 +67,7 @@ export const UserMock5: User = {
 	profilePicture: null,
 	eventsId: ['1'],
 };
-export const UserMock6: User = {
+export const UserMock6: UserModel = {
 	id: '6',
 	firstName: 'Pascal',
 	lastName: 'Mignot',

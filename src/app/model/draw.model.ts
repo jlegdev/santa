@@ -1,4 +1,4 @@
-import { User, UserMock1, UserMock2 } from './user.model';
+import { UserMock1, UserMock2, UserModel } from './user.model';
 
 export interface DrawResult {
 	isActive: boolean;
@@ -15,8 +15,8 @@ export enum DrawResultTrad {
 }
 
 export interface DrawRelation {
-	giver: User;
-	receiver: User;
+	giver: UserModel;
+	receiver: UserModel;
 }
 
 export const DrawRelationMock1: DrawRelation = {

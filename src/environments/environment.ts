@@ -15,12 +15,11 @@ const firebaseConfig: FirebaseConfig = {
 };
 
 export const environment: Environment = {
-	isProduction: true,
+	isProduction: false,
 	isMock: true,
 	apiUrl: 'http://localhost:5000/api',
 	apiVersion: 'v1',
 	api: {},
-	firebase: firebaseConfig,
 };
 
 /*

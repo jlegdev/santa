@@ -12,7 +12,7 @@ const firebaseConfig: FirebaseConfig = {
 
 export const environment: EnvironmentProd = {
 	isProduction: true,
-	isMock: true,
+	isMock: false,
 	apiUrl: 'test',
 	apiVersion: 'v1',
 	api: {},

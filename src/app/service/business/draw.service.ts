@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DrawRelation, DrawResult } from 'src/app/model/draw.model';
 import { SantaEvent } from 'src/app/model/santa-event.model';
-import { User } from 'src/app/model/user.model';
+import { UserModel } from 'src/app/model/user.model';
 import { UtilsService } from '../utils/utils.service';
 
 @Injectable({
@@ -10,16 +10,16 @@ import { UtilsService } from '../utils/utils.service';
 export class DrawService {
 	constructor(private utilsService: UtilsService) {}
 
-	public getReceiverOfUserIdFromDrawResult(userId: string, drawResult: DrawResult): User {
+	public getReceiverOfUserIdFromDrawResult(userId: string, drawResult: DrawResult): UserModel {
 		const relation: DrawRelation | undefined = drawResult.relations.find((relation: DrawRelation) => relation.giver.id == userId);
 		if (relation === undefined) {
 			throw new Error('BusinessError Draw. Receiver not found. \nUserId: ' + userId + '\nDrawResult: ' + drawResult);
 		}
-		const user: User = relation.receiver;
+		const user: UserModel = relation.receiver;
 		return user;
 	}
 	public createDrawRelations(event: SantaEvent): DrawRelation[] {
-		const ids: string[] = event.participants.map((user: User) => user.id);
+		const ids: string[] = event.participants.map((user: UserModel) => user.id);
 		const shuffledIds = [...ids]; // Copie du tableau des IDs
 		let validDraw = false;
 		let drawMap = new Map<string, string>();
@@ -41,9 +41,9 @@ export class DrawService {
 		const drawRelations: DrawRelation[] = [];
 		Array.from(drawMap.entries()).forEach((value: [string, string]) => {
 			const idGiver: string = value[0];
-			const giver: User = event.participants.find((user: User) => user.id == idGiver) as User;
+			const giver: UserModel = event.participants.find((user: UserModel) => user.id == idGiver) as UserModel;
 			const idReceiver: string = value[1];
-			const receiver: User = event.participants.find((user: User) => user.id == idReceiver) as User;
+			const receiver: UserModel = event.participants.find((user: UserModel) => user.id == idReceiver) as UserModel;
 			const relation: DrawRelation = { giver: giver, receiver: receiver };
 			drawRelations.push(relation);
 		});

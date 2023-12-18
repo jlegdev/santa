@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StorageKeyEnum } from '../../enum/storage-key.enum';
-import { User } from '../../model/user.model';
+import { UserModel } from '../../model/user.model';
 
 @Injectable({
 	providedIn: 'root',
@@ -19,9 +19,9 @@ export class StorageService {
 		return this._getLocal(StorageKeyEnum.KEY_TOKEN);
 	}
 
-	public getUser(): User | undefined {
-		const user: User | string = this._getLocal(StorageKeyEnum.KEY_USER);
-		return user ? (JSON.parse(user) as User) : undefined;
+	public getUser(): UserModel | undefined {
+		const user: UserModel | string = this._getLocal(StorageKeyEnum.KEY_USER);
+		return user ? (JSON.parse(user) as UserModel) : undefined;
 	}
 	public getLang(): string {
 		// on récupère "en"
@@ -49,7 +49,7 @@ export class StorageService {
 		this._storeLocal(StorageKeyEnum.KEY_TOKEN, String(token));
 	}
 
-	public storeUser(user: User): void {
+	public storeUser(user: UserModel): void {
 		this.deleteUser();
 		this._storeLocal(StorageKeyEnum.KEY_USER, user);
 	}

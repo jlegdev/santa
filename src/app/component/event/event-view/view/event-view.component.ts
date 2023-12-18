@@ -5,7 +5,7 @@ import { ImgPathEnum } from 'src/app/enum/img.path.enum';
 import { RoutePathEnum } from 'src/app/enum/route.path.enum';
 import { DrawRelation, DrawResult } from 'src/app/model/draw.model';
 import { EventTrad, SantaEvent } from 'src/app/model/santa-event.model';
-import { User } from 'src/app/model/user.model';
+import { UserModel } from 'src/app/model/user.model';
 import { AuthService } from 'src/app/service/api/auth.service';
 import { DrawService } from 'src/app/service/business/draw.service';
 import { DialogService } from 'src/app/service/dialog.service';
@@ -22,7 +22,7 @@ export class EventViewComponent implements OnInit {
 	@Input({ required: true })
 	public event!: SantaEvent;
 
-	public userGiver!: User;
+	public userGiver!: UserModel;
 	public isGiverDisplayed: boolean = false;
 	public isResultActiveDrawDisplayed: boolean = false;
 	public readonly i18nNamespace: string = 'event.view';
@@ -44,7 +44,7 @@ export class EventViewComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		const currentUser: User | undefined = this.authService.getCurrentUser();
+		const currentUser: UserModel | undefined = this.authService.getCurrentUser();
 		if (this.event.drawResultActive) {
 			this.userGiver = this.drawService.getReceiverOfUserIdFromDrawResult(currentUser.id, this.event.drawResultActive);
 		}

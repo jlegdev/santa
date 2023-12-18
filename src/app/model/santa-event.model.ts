@@ -1,7 +1,7 @@
 import { EventStatuEnum } from '../enum/event.status.enum';
 import { EventTypeEnum } from '../enum/event.type.enum';
 import { DrawResult, DrawResult1, DrawResult2 } from './draw.model';
-import { User, UserMock1, UserMock2, UserMock3, UserMock4, UserMock5, UserMock6 } from './user.model';
+import { UserMock1, UserMock2, UserMock3, UserMock4, UserMock5, UserMock6, UserModel } from './user.model';
 
 // Modèle pour représenter un événement
 export interface SantaEventBasic {
@@ -16,10 +16,10 @@ export interface SantaEventBasic {
 
 export interface SantaEvent extends SantaEventBasic {
 	id: string;
-	creator: User;
+	creator: UserModel;
 	token: string;
 	dateCreate: Date;
-	participants: User[];
+	participants: UserModel[];
 	drawResultActive?: DrawResult;
 	oldDrawResult?: DrawResult[];
 }

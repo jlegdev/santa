@@ -3,7 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
 import { APP_INITIALIZER, LOCALE_ID, NgModule, Provider } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth } from '@angular/fire/auth';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -29,9 +29,6 @@ import { FirebaseConfig } from './model/environment.model';
 import { TradPipeModule } from './pipe/trad.module';
 import { AuthService } from './service/api/auth.service';
 import { EventService } from './service/api/event.service';
-import { AuthMockService } from './service/api/mock/auth.mock.service';
-import { EventMockService } from './service/api/mock/event.mock.service';
-import { UserMockService } from './service/api/mock/user.mock.service';
 import { UserService } from './service/api/user.service';
 import { TradService } from './service/trad.service';
 import { SpinnerModule } from './shared/components/ui/spinner/spinner/spinner.module';
@@ -71,7 +68,22 @@ const LazyModules: any[] = [HomeModule, LoginModule, RegisterModule, EventModule
 const prodModules: any[] = [
 	provideFirebaseApp(() => initializeApp(environment.firebase as FirebaseConfig)),
 	provideFirestore(() => getFirestore()),
-	provideAuth(() => getAuth()),
+	AngularFireAuthModule,
+];
+
+const mockProviders: Provider[] = [
+	{
+		provide: AuthService,
+		useClass: AuthService,
+	},
+	{
+		provide: EventService,
+		useClass: EventService,
+	},
+	{
+		provide: UserService,
+		useClass: UserService,
+	},
 ];
 const providers: Provider[] = [
 	{ provide: LOCALE_ID, useValue: 'fr' },
@@ -82,23 +94,11 @@ const providers: Provider[] = [
 		deps: [TradService],
 		multi: true,
 	},
-	{
-		provide: AuthService,
-		useClass: environment.isMock ? AuthMockService : AuthService,
-	},
-	{
-		provide: EventService,
-		useClass: environment.isMock ? EventMockService : EventService,
-	},
-	{
-		provide: UserService,
-		useClass: environment.isMock ? UserMockService : UserService,
-	},
 ];
 @NgModule({
 	declarations: [AppComponent, MainLayoutComponent],
 	imports: [AngularModules, InternalModules, MaterialModules, UIModules, prodModules, LazyModules],
-	providers: [providers],
+	providers: [providers, environment.isMock ? mockProviders : []],
 	exports: [TradPipeModule],
 	bootstrap: [AppComponent],
 })
