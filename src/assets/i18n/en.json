@@ -212,6 +212,12 @@
           "title":"Draft",
           "content":"Do you confirm the running of draw ?"
         }
+      },
+      "delete":{
+        "dialog":{
+          "title":"Delete",
+          "content":"Are you sure you want to delete this event ?"
+        }
       }
     },
     "create":{

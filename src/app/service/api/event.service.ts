@@ -1,20 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Observable, concatMap, map } from 'rxjs';
+import { Observable, concatMap, forkJoin, map, switchMap } from 'rxjs';
 import { EventStatuEnum } from 'src/app/enum/event.status.enum';
 import { SantaEvent, SantaEventBasic } from 'src/app/model/santa-event.model';
 import { UserModel } from 'src/app/model/user.model';
 import { DocumentNotFoundError } from 'src/app/shared/error/api.error';
 import { UserIsAlreadyParticipatingError } from 'src/app/shared/error/business.error';
+import { StorageService } from '../utils/storage.service';
 import { AuthService } from './auth.service';
 import { FirebaseService } from './firebase.service';
-import { UserMockService } from './mock/user.mock.service';
+import { UserService } from './user.service';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class EventService {
 	private _apiUrl: string = 'events';
-	constructor(private authService: AuthService, private firebaseService: FirebaseService, private userMockService: UserMockService) {}
+	constructor(
+		private authService: AuthService,
+		private eventService: EventService,
+		private firebaseService: FirebaseService,
+		private userService: UserService,
+		private storageService: StorageService
+	) {}
 
 	public getOneEvent(id: string): Observable<SantaEvent> {
 		const events$: Observable<SantaEvent> = this.firebaseService.getOne<SantaEvent>(this._apiUrl, id);
@@ -38,6 +45,16 @@ export class EventService {
 		const events$: Observable<SantaEvent[]> = this.firebaseService.getAll<SantaEvent>(this._apiUrl);
 		return events$;
 	}
+
+	public getEventsOfUser(user: UserModel): Observable<SantaEvent[]> {
+		const events: Observable<SantaEvent>[] = [];
+		user.eventsId?.forEach((eventId: string) => {
+			events.push(this.eventService.getOneEvent(eventId));
+		});
+
+		return forkJoin(events);
+	}
+
 	public createEvent(event: SantaEventBasic): Observable<string> {
 		// get documents (data) from the collection using collectionData
 		const token: string = this._generateEventToken();
@@ -46,11 +63,18 @@ export class EventService {
 			...event,
 			creator: currentUser,
 			dateCreate: new Date(),
-			participants: [],
+			participants: [currentUser],
 			token: token,
 			statut: EventStatuEnum.REGISTERING,
 		};
-		return this.firebaseService.create(this._apiUrl, eventWithMoreInformation);
+
+		return this.firebaseService.create(this._apiUrl, eventWithMoreInformation).pipe(
+			switchMap((eventId: string) => {
+				let user: UserModel = this.authService.getCurrentUser();
+				user.eventsId?.push(eventId);
+				return this.userService.updateUser(user, user.id).pipe(map(() => eventId));
+			})
+		);
 	}
 
 	public updateEvent(event: Partial<SantaEvent>, eventId: string): Observable<void> {
@@ -69,12 +93,11 @@ export class EventService {
 				if (userIsAlreadyParticipatingError) {
 					throw new UserIsAlreadyParticipatingError('User is already participating');
 				} else {
-					event.participants.push(currentUser);
 					currentUser.eventsId?.push(event.id);
-					return this.userMockService.updateUser(currentUser, currentUser.id).pipe(
-						concatMap((result: string) => {
-							this.updateEvent(event, event.id);
-							return event.id;
+					return this.userService.updateUser(currentUser, currentUser.id).pipe(
+						concatMap((result: void) => {
+							event.participants.push(currentUser);
+							return this.updateEvent(event, event.id).pipe(map((result: void) => event.id));
 						})
 					);
 				}

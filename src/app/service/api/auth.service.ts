@@ -79,6 +79,7 @@ export class AuthService implements IAuthService {
 					if (currentUser) {
 						return this.userService.getUserByuuid(currentUser.uid).pipe(
 							map((userJustCreated: UserModel) => {
+								console.log(userJustCreated);
 								this.storageService.storeUser(userJustCreated);
 								return true;
 							})

@@ -31,6 +31,7 @@ export class EventCreateContainerComponent implements OnInit {
 			.createEvent(event)
 			.pipe(switchMap((eventId: string) => this.eventService.getOneEvent(eventId)))
 			.subscribe((event: SantaEvent) => {
+				console.log(event);
 				const url: string = this.utilsService.formatURLString(RoutePathEnum.EVENT_VIEW, event.id);
 				const successMessage: string = this.tradService.instant('success', 'event.create', { token: event.token });
 				this.notifService.success(successMessage);

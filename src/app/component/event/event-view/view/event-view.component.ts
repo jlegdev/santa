@@ -21,6 +21,8 @@ export class EventViewComponent implements OnInit {
 
 	@Output()
 	public onEmitLaunchDraft: EventEmitter<SantaEvent> = new EventEmitter<SantaEvent>();
+	@Output()
+	public onEmitDeleteEvent: EventEmitter<SantaEvent> = new EventEmitter<SantaEvent>();
 
 	public userGiver!: UserModel;
 	public isGiverDisplayed: boolean = false;
@@ -66,5 +68,9 @@ export class EventViewComponent implements OnInit {
 
 	public onLaunchDraft(): void {
 		this.onEmitLaunchDraft.emit(this.event);
+	}
+
+	public onDeleteEvent(): void {
+		this.onEmitDeleteEvent.emit(this.event);
 	}
 }

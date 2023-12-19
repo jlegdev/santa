@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map, of, switchMap } from 'rxjs';
+import { RoutePathEnum } from 'src/app/enum/route.path.enum';
 import { SantaEvent } from 'src/app/model/santa-event.model';
 import { EventService } from 'src/app/service/api/event.service';
 import { DrawService } from 'src/app/service/business/draw.service';
 import { DialogService } from 'src/app/service/dialog.service';
+import { RoutingService } from 'src/app/service/utils/routing.service';
 import { ButtonActionTradEnum } from 'src/app/shared/enum/button-action-trad.enum';
 
 @Component({
@@ -18,12 +20,13 @@ export class EventViewContainerComponent implements OnInit {
 	public readonly i18nNamespace: string = 'event.view';
 
 	constructor(
-		private route: ActivatedRoute,
-		private eventService: EventService,
+		private activatedRoute: ActivatedRoute,
+		private dialogService: DialogService,
 		private drawService: DrawService,
-		private dialogService: DialogService
+		private eventService: EventService,
+		private routingService: RoutingService
 	) {
-		this.idEvent = this.route.snapshot.paramMap.get('id') ?? '';
+		this.idEvent = this.activatedRoute.snapshot.paramMap.get('id') ?? '';
 		this.event$ = this.eventService.getOneEvent(this.idEvent);
 	}
 
@@ -42,5 +45,24 @@ export class EventViewContainerComponent implements OnInit {
 				})
 			)
 			.subscribe(() => {});
+	}
+
+	public onDeleteEvent(event: SantaEvent): void {
+		this.dialogService
+			.openConfirmActionDialog(`${this.i18nNamespace}.delete.dialog`, ButtonActionTradEnum.VALIDATE)
+			.pipe(
+				switchMap((shouldBeDeleted: boolean) => {
+					if (shouldBeDeleted) {
+						return this.eventService.deleteEvent(event.id).pipe(map(() => true));
+					} else {
+						return of(shouldBeDeleted);
+					}
+				})
+			)
+			.subscribe((isDeleted: boolean) => {
+				if (isDeleted) {
+					this.routingService.navigate(RoutePathEnum.HOME);
+				}
+			});
 	}
 }

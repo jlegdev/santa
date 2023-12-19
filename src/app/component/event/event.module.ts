@@ -17,14 +17,12 @@ import { EventCreateContainerComponent } from './event-create/container/event-cr
 import { EventCreateViewComponent } from './event-create/view/event-create-view.component';
 import { EventJoinContainerComponent } from './event-join/container/event-join-container.component';
 import { EventJoinComponent } from './event-join/view/event-join.component';
-import { EventListContainerComponent } from './event-list/container/event-list-container.component';
-import { EventListComponent } from './event-list/view/event-list.component';
 import { EventUpdateContainerComponent } from './event-update/container/event-update-container.component';
 import { EventUpdateViewComponent } from './event-update/view/event-update-view.component';
 import { EventViewContainerComponent } from './event-view/container/event-view-container.component';
 import { DrawDetailComponent } from './event-view/view/draw-detail/draw-detail.component';
-import { EventViewComponent } from './event-view/view/event-view.component';
 import { EventInformationComponent } from './event-view/view/event-information/event-information.component';
+import { EventViewComponent } from './event-view/view/event-view.component';
 const AngularModules: any[] = [CommonModule, ReactiveFormsModule, MatExpansionModule];
 const UIModules: any[] = [SpinnerModule, ConfirmButtonModule];
 const InternalModules: any[] = [TradPipeModule, PeoplePipeModule];
@@ -46,8 +44,6 @@ const MaterialModules: any[] = [
 	declarations: [
 		EventJoinComponent,
 		EventJoinContainerComponent,
-		EventListComponent,
-		EventListContainerComponent,
 		EventViewComponent,
 		EventViewContainerComponent,
 		EventCreateContainerComponent,
@@ -55,7 +51,7 @@ const MaterialModules: any[] = [
 		EventUpdateContainerComponent,
 		EventUpdateViewComponent,
 		DrawDetailComponent,
-  EventInformationComponent,
+		EventInformationComponent,
 	],
 	imports: [AngularModules, UIModules, InternalModules, MaterialModules],
 })

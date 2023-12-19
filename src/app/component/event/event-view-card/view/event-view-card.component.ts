@@ -3,8 +3,6 @@ import { EventStatuEnum } from 'src/app/enum/event.status.enum';
 import { IconEnum } from 'src/app/enum/icon.enum';
 import { ImgPathEnum } from 'src/app/enum/img.path.enum';
 import { EventTrad, SantaEvent } from 'src/app/model/santa-event.model';
-import { AuthService } from 'src/app/service/api/auth.service';
-import { DrawService } from 'src/app/service/business/draw.service';
 
 @Component({
 	selector: 'app-event-view-card',
@@ -23,10 +21,8 @@ export class EventViewCardComponent implements OnInit {
 	public readonly IconEnum = IconEnum;
 	public readonly EventStatuEnum = EventStatuEnum;
 	public readonly imgSrc: ImgPathEnum;
-	public readonly imgAvatarSrc: ImgPathEnum;
-	constructor(private authService: AuthService, private drawService: DrawService) {
-		this.imgSrc = ImgPathEnum.SANTA3;
-		this.imgAvatarSrc = ImgPathEnum.SANTA_AVATAR_1;
+	constructor() {
+		this.imgSrc = ImgPathEnum.SANTA4;
 	}
 
 	ngOnInit(): void {}

@@ -22,6 +22,11 @@
             <mat-icon class="rotating-icon">{{IconEnum.DRAFT}}</mat-icon>
             {{(event.drawResultActive ? 'draw-again' : 'draw') | trad:i18nNamespaceButton | async}}
           </button>
+
+          <button *ngIf="isEventOfCurrentUser" (click)="onDeleteEvent()" mat-raised-button color="warn">
+            <mat-icon>{{IconEnum.DELETE}}</mat-icon>
+            {{'delete' | trad:i18nNamespaceButton | async}}
+          </button>
         </div>
 
 

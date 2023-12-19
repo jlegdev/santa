@@ -5,6 +5,7 @@ import { UserMock1, UserMock2, UserMock3, UserMock4, UserMock5, UserMock6, UserM
 
 // Modèle pour représenter un événement
 export interface SantaEventBasic {
+	id?: string;
 	title: string;
 	description?: string;
 	budget: number;

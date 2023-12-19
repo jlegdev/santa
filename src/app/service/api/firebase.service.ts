@@ -54,7 +54,10 @@ export class FirebaseService {
 		return from(
 			getDoc(documentReference)
 				.then((value: DocumentSnapshot<DocumentData, DocumentData>) => {
-					return value.data() as T;
+					console.log(value);
+					console.log(value.data());
+					console.log(value.exists());
+					return { ...value.data(), id: documentReference.id } as T;
 				})
 				.catch((error: any) => {
 					throw new DocumentNotFoundError('Document not found ' + error);
