@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { EventStatuEnum } from 'src/app/enum/event.status.enum';
 import { DrawRelation, DrawResult } from 'src/app/model/draw.model';
 import { SantaEvent } from 'src/app/model/santa-event.model';
 import { UserModel } from 'src/app/model/user.model';
+import { EventService } from '../api/event.service';
 import { UtilsService } from '../utils/utils.service';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class DrawService {
-	constructor(private utilsService: UtilsService) {}
+	constructor(private utilsService: UtilsService, private eventService: EventService) {}
 
 	public getReceiverOfUserIdFromDrawResult(userId: string, drawResult: DrawResult): UserModel {
 		const relation: DrawRelation | undefined = drawResult.relations.find((relation: DrawRelation) => relation.giver.id == userId);
@@ -48,5 +51,13 @@ export class DrawService {
 			drawRelations.push(relation);
 		});
 		return drawRelations;
+	}
+
+	public launchDraft(event: SantaEvent): Observable<void> {
+		const drawRelations: DrawRelation[] = this.createDrawRelations(event);
+		const drawResult: DrawResult = { isActive: true, dateDraft: new Date(), relations: drawRelations };
+		event.drawResultActive = drawResult;
+		event.statut = EventStatuEnum.RUNNING;
+		return this.eventService.updateEvent(event, event.id);
 	}
 }

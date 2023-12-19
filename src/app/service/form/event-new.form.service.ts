@@ -16,7 +16,7 @@ export class EventNewFormService {
 			title: new FormControl(null, [Validators.required, Validators.pattern(RegexPatternEnum.EVENT_TITLE)]),
 			description: new FormControl(null, [Validators.pattern(RegexPatternEnum.EVENT_DESCRIPTION)]),
 			dateEvent: new FormControl(null, [Validators.required]),
-			budget: new FormControl(null, [Validators.required, Validators.pattern(RegexPatternEnum.NUMBER_POSITIF)]),
+			budget: new FormControl(null, [Validators.required, Validators.pattern(RegexPatternEnum.NUMBER_POSITIF_NO_ZERO)]),
 		});
 		return form;
 	}

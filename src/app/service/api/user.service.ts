@@ -9,7 +9,7 @@ import { FirebaseService } from './firebase.service';
 	providedIn: 'root',
 })
 export class UserService {
-	private _apiUrl: string = 'events';
+	private _apiUrl: string = 'users';
 	constructor(private firebaseService: FirebaseService, private authService: AuthService) {}
 
 	public getOneUser(id: string): Observable<UserModel> {
@@ -20,6 +20,10 @@ export class UserService {
 	public getUserByuuid(uid: string): Observable<UserModel> {
 		return this.getUsers().pipe(
 			map((users: UserModel[]) => {
+				console.log('get get user by uid');
+				console.log(uid);
+				console.log(users);
+				console.log(uid);
 				const user: UserModel | undefined = users.find((user: UserModel) => user.uid == uid);
 				if (user) {
 					return user;

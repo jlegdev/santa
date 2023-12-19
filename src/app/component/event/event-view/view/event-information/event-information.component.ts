@@ -8,6 +8,7 @@ import { EventTrad, SantaEvent } from 'src/app/model/santa-event.model';
 })
 export class EventInformationComponent implements OnInit {
 	@Input() public event!: SantaEvent;
+	@Input() public isEventOfCurrentUser: boolean = false;
 
 	public readonly i18nEvent = EventTrad;
 

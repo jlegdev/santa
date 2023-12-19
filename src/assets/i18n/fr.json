@@ -153,7 +153,7 @@
       "creator":"Créateur",
       "title":"Titre",
       "type":"Type",
-      "token":"Token",
+      "token":"Token à partager pour intégrer l'évènement : ",
       "statu":{
         "default":"Statu",
         "variant":{
@@ -216,6 +216,9 @@
           "content":"Confirmez vous le lancement du tirage au sort ? "
         }
       }
+    },
+    "create":{
+      "success":"Evènement bien créé. Voici le token à partager à vos amis : {{token}} \n Vous le retrouverez sur cette page "
     }
   },
   "register":{

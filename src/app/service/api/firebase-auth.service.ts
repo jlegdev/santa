@@ -12,7 +12,12 @@ interface FirebasError {
 	providedIn: 'root',
 })
 export class FirebaseAuthService {
-	constructor(private auth: Auth, private notifService: NotifService, private storageService: StorageService) {}
+	constructor(private auth: Auth, private notifService: NotifService, private storageService: StorageService) {
+		this.auth.onAuthStateChanged((value) => {
+			console.log('auth changed  ');
+			console.log(value);
+		});
+	}
 
 	public register(email: string, password: string, firstName: string, lastName: string): Promise<boolean> {
 		return createUserWithEmailAndPassword(this.auth, email, password)

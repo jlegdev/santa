@@ -150,7 +150,7 @@
       "creator":"Creator",
       "title":"Title",
       "type":"Type",
-      "token":"Token",
+      "token":"Token to share for integrating the event",
       "statu":{
         "default":"Statu",
         "variant":{
@@ -213,6 +213,9 @@
           "content":"Do you confirm the running of draw ?"
         }
       }
+    },
+    "create":{
+      "success":"Event created. Here the token to share to your friend : {{token}} \n You can retrieve it on this page "
     }
   },
   "register":{

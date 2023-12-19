@@ -32,7 +32,8 @@
                 <mat-panel-title>Informations</mat-panel-title>
               </mat-expansion-panel-header>
               <ng-template matExpansionPanelContent>
-                <app-event-information [event]="event"></app-event-information>
+                <app-event-information [event]="event"
+                  [isEventOfCurrentUser]="isEventOfCurrentUser"></app-event-information>
               </ng-template>
             </mat-expansion-panel>
             <mat-expansion-panel *ngIf="isEventOfCurrentUser && event.drawResultActive">

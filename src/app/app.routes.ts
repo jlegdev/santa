@@ -15,7 +15,7 @@ export const AppRoutes: Routes = [
 	{
 		path: RoutePathEnum.REGISTER,
 		component: RegisterContainerComponent,
-		title: RouteTitleMap.get(RoutePathEnum.LOGIN),
+		title: RouteTitleMap.get(RoutePathEnum.REGISTER),
 	},
 	{
 		path: '',

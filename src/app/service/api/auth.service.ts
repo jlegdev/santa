@@ -23,13 +23,15 @@ export class AuthService implements IAuthService {
 		private userService: UserService
 	) {}
 
-	public register(register: Register): Observable<any> {
+	public register(register: Register): Observable<boolean> {
 		const isRegistered$: Observable<boolean> = from(
 			this.firebaseAuthService.register(register.login, register.password, register.firstName, register.lastName)
 		);
 		const userCreated$: Observable<boolean> = isRegistered$.pipe(
 			switchMap((isRegistered: boolean) => {
 				if (isRegistered) {
+					console.log('registerd success');
+					console.log(this.firebaseAuthService.getCurrentUser());
 					const currentUser: User | null = this.firebaseAuthService.getCurrentUser();
 					if (currentUser) {
 						const userModel: Omit<UserModel, 'id'> = {
@@ -68,8 +70,12 @@ export class AuthService implements IAuthService {
 
 		return isLogin$.pipe(
 			switchMap((isLogin: boolean) => {
+				console.log('is login');
+				console.log(isLogin);
 				if (isLogin) {
 					const currentUser: User | null = this.firebaseAuthService.getCurrentUser();
+					console.log('current user');
+					console.log(currentUser);
 					if (currentUser) {
 						return this.userService.getUserByuuid(currentUser.uid).pipe(
 							map((userJustCreated: UserModel) => {
@@ -87,12 +93,13 @@ export class AuthService implements IAuthService {
 		);
 	}
 
-	public logout(): Promise<boolean> {
-		return new Promise<boolean>((resolve, reject) => {
-			this.storageService.clear();
-			this.routingService.navigate(RoutePathEnum.LOGIN);
-			resolve(true);
-		});
+	public logout(): Observable<any> {
+		return from(
+			this.firebaseAuthService.logout().then(() => {
+				this.storageService.clear();
+				this.routingService.navigate(RoutePathEnum.LOGIN);
+			})
+		);
 	}
 
 	public getCurrentUser(): UserModel {

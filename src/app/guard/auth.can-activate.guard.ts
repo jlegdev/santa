@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { RoutePathEnum } from 'src/app/enum/route.path.enum';
 import { AuthService } from '../service/api/auth.service';
 @Injectable({
 	providedIn: 'root',

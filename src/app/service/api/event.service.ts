@@ -61,7 +61,7 @@ export class EventService {
 		return this.firebaseService.delete(this._apiUrl, eventId);
 	}
 
-	public joinEvent(eventToken: string) : Observable<string> {
+	public joinEvent(eventToken: string): Observable<string> {
 		return this.getOneEventByToken(eventToken).pipe(
 			concatMap((event: SantaEvent) => {
 				const currentUser: UserModel = this.authService.getCurrentUser();

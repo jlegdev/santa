@@ -1,5 +1,5 @@
 <ng-container *ngIf="event$ | async as event;else loading">
-  <app-event-view [event]="event"></app-event-view>
+  <app-event-view [event]="event" (onEmitLaunchDraft)="onLaunchDraft($event)"></app-event-view>
 </ng-container>
 
 <ng-template #loading>
