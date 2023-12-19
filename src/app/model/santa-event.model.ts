@@ -12,7 +12,7 @@ export interface SantaEventBasic {
 	type: EventTypeEnum;
 	statut: EventStatuEnum;
 	dateRegisterClose: Date;
-	dateEvent: Date;
+	dateEvent: any;
 }
 
 export interface SantaEvent extends SantaEventBasic {

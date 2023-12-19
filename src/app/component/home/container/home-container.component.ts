@@ -15,20 +15,24 @@ import { RoutingService } from 'src/app/service/utils/routing.service';
 export class HomeContainerComponent implements OnInit {
 	public currentUser: UserModel;
 	public events$!: Observable<Array<SantaEvent>>;
+	public events: Array<SantaEvent> = [];
 
 	constructor(private authService: AuthService, private eventService: EventService, private routingService: RoutingService) {
 		this.currentUser = this.authService.getCurrentUser();
 	}
 
 	ngOnInit(): void {
-		this._initUser();
 		this._initEvents();
 	}
 
-	private _initUser(): void {}
-
 	private _initEvents(): void {
-		this.events$ = this.eventService.getEvents();
+		console.log('current suer');
+		console.log(this.currentUser);
+
+		this.events$ = this.eventService.getEventsOfUser(this.currentUser);
+		this.events$.subscribe((result) => {
+			this.events = result;
+		});
 	}
 
 	public onCreateEvent(): void {

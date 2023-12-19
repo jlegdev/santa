@@ -34,7 +34,7 @@ export class EventViewComponent implements OnInit {
 	public readonly EventStatuEnum = EventStatuEnum;
 	public readonly imgSrc: ImgPathEnum;
 
-	public isEventOfCurrentUser!: boolean;
+	public isEventOfCurrentUser: boolean = false;
 	constructor(
 		private authService: AuthService,
 		private drawService: DrawService,
@@ -49,8 +49,8 @@ export class EventViewComponent implements OnInit {
 		if (this.event.drawResultActive) {
 			this.userGiver = this.drawService.getReceiverOfUserIdFromDrawResult(currentUser.id, this.event.drawResultActive);
 		}
-		// this.isEventOfCurrentUser = this.event.creator.id == currentUser.id;
-		this.isEventOfCurrentUser = true;
+		this.isEventOfCurrentUser = this.event.creator.id == currentUser.id;
+		// this.isEventOfCurrentUser = true;
 	}
 
 	public onUpdateDisplayGiver(): void {

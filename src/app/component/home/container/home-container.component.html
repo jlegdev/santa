@@ -1,4 +1,4 @@
-<ng-container *ngIf="events$ | async as events;else loading">
+<ng-container>
   <app-home [userName]="currentUser ? currentUser.firstName+' '+currentUser.lastName:''" [events]="events"
     (emitOnJoinEvent)="onJoinEvent()" (emitOnCreateEvent)="onCreateEvent()"></app-home>
 </ng-container>

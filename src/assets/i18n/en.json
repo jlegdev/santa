@@ -102,7 +102,8 @@
       "list":"Here your running events",
       "join":"Join an existant event",
       "create":"Create an event"
-    }
+    },
+    "no-result":"You don't have any events. You can create or join one."
   },
   "login":{
     "title":"Credentials",

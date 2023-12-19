@@ -5,8 +5,14 @@
   <h5>{{'event.list' | trad:i18nHome| async}}</h5>
 
   <div class="view-container">
-    <div *ngFor="let event of events; trackBy:trackEvent" class="view">
-      <app-event-view-card-container [event]="event"></app-event-view-card-container>
-    </div>
+    <ng-container *ngIf="events.length > 0; noResult">
+      <div *ngFor="let event of events; trackBy:trackEvent" class="view">
+        <app-event-view-card-container [event]="event"></app-event-view-card-container>
+      </div>
+    </ng-container>
+
+    <ng-template #noResult>
+      <p>{{'no-result' | trad:i18nHome  | async}}</p>
+    </ng-template>
   </div>
 </div>

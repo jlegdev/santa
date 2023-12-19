@@ -105,7 +105,8 @@
       "list":"Voici vos évènements en cours",
       "join":"Rejoindre un évènement existant",
       "create":"Créer un évènement"
-    }
+    },
+    "no-result":"Vous n'avez aucun évènement en cours. Créez ou rejoignez-en un"
   },
   "login":{
     "title":"Crédentiels",

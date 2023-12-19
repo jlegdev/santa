@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, concatMap, forkJoin, map, switchMap } from 'rxjs';
+import { Observable, concatMap, forkJoin, from, map, switchMap } from 'rxjs';
 import { EventStatuEnum } from 'src/app/enum/event.status.enum';
 import { SantaEvent, SantaEventBasic } from 'src/app/model/santa-event.model';
 import { UserModel } from 'src/app/model/user.model';
 import { DocumentNotFoundError } from 'src/app/shared/error/api.error';
 import { UserIsAlreadyParticipatingError } from 'src/app/shared/error/business.error';
-import { StorageService } from '../utils/storage.service';
 import { AuthService } from './auth.service';
 import { FirebaseService } from './firebase.service';
 import { UserService } from './user.service';
@@ -15,13 +14,7 @@ import { UserService } from './user.service';
 })
 export class EventService {
 	private _apiUrl: string = 'events';
-	constructor(
-		private authService: AuthService,
-		private eventService: EventService,
-		private firebaseService: FirebaseService,
-		private userService: UserService,
-		private storageService: StorageService
-	) {}
+	constructor(private authService: AuthService, private firebaseService: FirebaseService, private userService: UserService) {}
 
 	public getOneEvent(id: string): Observable<SantaEvent> {
 		const events$: Observable<SantaEvent> = this.firebaseService.getOne<SantaEvent>(this._apiUrl, id);
@@ -29,8 +22,12 @@ export class EventService {
 	}
 
 	public getOneEventByToken(eventToken: string): Observable<SantaEvent> {
+		console.log("on cherche l'event au token ");
+		console.log(eventToken);
 		return this.getEvents().pipe(
 			map((events: SantaEvent[]) => {
+				console.log('les events', events);
+				console.log('le token', eventToken);
 				const event: SantaEvent | undefined = events.find((event: SantaEvent) => event.token == eventToken);
 				if (event) {
 					return event;
@@ -47,12 +44,17 @@ export class EventService {
 	}
 
 	public getEventsOfUser(user: UserModel): Observable<SantaEvent[]> {
+		console.log('get event of user function service');
+
 		const events: Observable<SantaEvent>[] = [];
 		user.eventsId?.forEach((eventId: string) => {
-			events.push(this.eventService.getOneEvent(eventId));
+			events.push(this.getOneEvent(eventId));
 		});
-
-		return forkJoin(events);
+		if (events.length > 0) {
+			return forkJoin(events);
+		} else {
+			return from([]);
+		}
 	}
 
 	public createEvent(event: SantaEventBasic): Observable<string> {
@@ -70,9 +72,19 @@ export class EventService {
 
 		return this.firebaseService.create(this._apiUrl, eventWithMoreInformation).pipe(
 			switchMap((eventId: string) => {
-				let user: UserModel = this.authService.getCurrentUser();
-				user.eventsId?.push(eventId);
+				const eventCreatedWithId: Partial<SantaEvent> = { ...eventWithMoreInformation, id: eventId };
+        return this.updateEvent(eventCreatedWithId,eventId).pipe(concatMap((result:void)=>{
+let user: UserModel = { ...this.authService.getCurrentUser() };
+				if (!user.eventsId) {
+					user.eventsId = [eventId];
+				} else {
+					user.eventsId.push(eventId);
+				}
+				console.log('event created the user associated is the next, we will update it for adding event id');
+				console.log(user);
 				return this.userService.updateUser(user, user.id).pipe(map(() => eventId));
+        }))
+
 			})
 		);
 	}
@@ -88,12 +100,21 @@ export class EventService {
 	public joinEvent(eventToken: string): Observable<string> {
 		return this.getOneEventByToken(eventToken).pipe(
 			concatMap((event: SantaEvent) => {
-				const currentUser: UserModel = this.authService.getCurrentUser();
+				console.log("l'event au token est ");
+				console.log(event);
+				const currentUser: UserModel = { ...this.authService.getCurrentUser() };
 				const userIsAlreadyParticipatingError: boolean = event.participants.some((participant: UserModel) => participant.id == currentUser.id);
 				if (userIsAlreadyParticipatingError) {
 					throw new UserIsAlreadyParticipatingError('User is already participating');
 				} else {
-					currentUser.eventsId?.push(event.id);
+					console.log('join event function');
+					if (!currentUser.eventsId) {
+						currentUser.eventsId = [event.id];
+					} else {
+						currentUser.eventsId.push(event.id);
+					}
+
+					console.log('current user');
 					return this.userService.updateUser(currentUser, currentUser.id).pipe(
 						concatMap((result: void) => {
 							event.participants.push(currentUser);

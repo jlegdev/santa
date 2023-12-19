@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { EventStatuEnum } from 'src/app/enum/event.status.enum';
 import { IconEnum } from 'src/app/enum/icon.enum';
 import { ImgPathEnum } from 'src/app/enum/img.path.enum';
@@ -9,7 +9,7 @@ import { EventTrad, SantaEvent } from 'src/app/model/santa-event.model';
 	templateUrl: './event-view-card.component.html',
 	styleUrls: ['./event-view-card.component.scss'],
 })
-export class EventViewCardComponent implements OnInit {
+export class EventViewCardComponent implements OnInit, OnChanges {
 	@Input({ required: true })
 	public event!: SantaEvent;
 
@@ -22,10 +22,16 @@ export class EventViewCardComponent implements OnInit {
 	public readonly EventStatuEnum = EventStatuEnum;
 	public readonly imgSrc: ImgPathEnum;
 	constructor() {
-		this.imgSrc = ImgPathEnum.SANTA4;
+		this.imgSrc = ImgPathEnum.SANTA1;
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		console.log(this.event.dateEvent);
+	}
+
+	ngOnChanges(changes: SimpleChanges): void {
+		console.log(this.event.dateEvent);
+	}
 
 	public onViewEvent(eventId: string, isNewTab: boolean): void {
 		this.emitOnViewEvent.emit({ id: eventId, isNewTab: isNewTab });

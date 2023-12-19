@@ -1,14 +1,15 @@
 <div class="card-container">
   <mat-card class="card">
     <mat-card-header class="card-header">
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{event.title}}</mat-card-title>
+      <div class="centered w-100 container-title">
+        <mat-card-title>{{event.title}}</mat-card-title>
+      </div>
       <!-- <mat-card-subtitle>{{event.description}}</mat-card-subtitle> -->
     </mat-card-header>
     <img mat-card-image [src]="imgSrc" alt="Photo of secret Santa">
     <mat-card-content>
       <div class="w-100 centered">
-        <p> Le {{event.dateEvent | date}}</p>
+        <p> Le {{event.dateEvent.toMillis() | date:'dd/MM/yyyy'}}</p>
         <p> {{i18nEvent.STATU| trad:i18nEvent.NAMESPACE_CLASS:{value:event.statut}| async }}</p>
       </div>
     </mat-card-content>

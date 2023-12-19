@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, concatMap, map } from 'rxjs';
 import { UserModel } from 'src/app/model/user.model';
 import { DocumentNotFoundError } from 'src/app/shared/error/api.error';
 import { AuthService } from './auth.service';
@@ -20,10 +20,6 @@ export class UserService {
 	public getUserByuuid(uid: string): Observable<UserModel> {
 		return this.getUsers().pipe(
 			map((users: UserModel[]) => {
-				console.log('get get user by uid');
-				console.log(uid);
-				console.log(users);
-				console.log(uid);
 				const user: UserModel | undefined = users.find((user: UserModel) => user.uid == uid);
 				if (user) {
 					return user;
@@ -39,10 +35,17 @@ export class UserService {
 	}
 
 	public createUser(user: Omit<UserModel, 'id'>): Observable<string> {
-		return this.firebaseService.create(this._apiUrl, user);
+		return this.firebaseService.create(this._apiUrl, user).pipe(
+			concatMap((userId: string) => {
+				const userWithId: UserModel = { ...user, id: userId };
+				return this.updateUser(userWithId, userId).pipe(map((result: void) => userId));
+			})
+		);
 	}
 
 	public updateUser(user: Partial<UserModel>, userId: string): Observable<void> {
+		console.log('update function we will update the id ' + userId);
+		console.log('the new valeu is ', user);
 		return this.firebaseService.update(this._apiUrl, userId, user);
 	}
 

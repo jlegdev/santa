@@ -30,8 +30,6 @@ export class AuthService implements IAuthService {
 		const userCreated$: Observable<boolean> = isRegistered$.pipe(
 			switchMap((isRegistered: boolean) => {
 				if (isRegistered) {
-					console.log('registerd success');
-					console.log(this.firebaseAuthService.getCurrentUser());
 					const currentUser: User | null = this.firebaseAuthService.getCurrentUser();
 					if (currentUser) {
 						const userModel: Omit<UserModel, 'id'> = {
@@ -70,15 +68,14 @@ export class AuthService implements IAuthService {
 
 		return isLogin$.pipe(
 			switchMap((isLogin: boolean) => {
-				console.log('is login');
-				console.log(isLogin);
 				if (isLogin) {
 					const currentUser: User | null = this.firebaseAuthService.getCurrentUser();
-					console.log('current user');
+					console.log('on est bien log c le current user : ');
 					console.log(currentUser);
 					if (currentUser) {
 						return this.userService.getUserByuuid(currentUser.uid).pipe(
 							map((userJustCreated: UserModel) => {
+								console.log(' on a recup en bd ce user');
 								console.log(userJustCreated);
 								this.storageService.storeUser(userJustCreated);
 								return true;
