@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
 	public readonly imgSrc: string = ImgPathEnum.LOGIN;
 
 	public readonly i18nRegister = RegisterTrad;
-	public readonly i18nNamespace: string = 'login';
+	public readonly i18nNamespace: string = 'register';
 
 	constructor(private registerFormService: RegisterFormService) {
 		this.form = this.registerFormService.getForm();

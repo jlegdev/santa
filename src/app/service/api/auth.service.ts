@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Observable, from } from 'rxjs';
+import { User } from 'firebase/auth';
+import { Observable, concatMap, from, map, of, switchMap } from 'rxjs';
 import { RoutePathEnum } from 'src/app/enum/route.path.enum';
-import { Credentials } from 'src/app/model/credentials.model';
+import { Credentials, Register } from 'src/app/model/credentials.model';
 import { UserModel } from 'src/app/model/user.model';
 import { NotifService } from '../utils/notif.service';
 import { RoutingService } from '../utils/routing.service';
 import { StorageService } from '../utils/storage.service';
 import { FirebaseAuthService } from './firebase-auth.service';
 import { IAuthService } from './iauth.service';
+import { UserService } from './user.service';
 
 @Injectable({
 	providedIn: 'root',
@@ -17,11 +19,44 @@ export class AuthService implements IAuthService {
 		private notifService: NotifService,
 		private storageService: StorageService,
 		private routingService: RoutingService,
-		private firebaseAuthService: FirebaseAuthService
+		private firebaseAuthService: FirebaseAuthService,
+		private userService: UserService
 	) {}
 
-	public register(credential: Credentials): Promise<any> {
-		return this.firebaseAuthService.register(credential.login, credential.password).then((value) => console.log(value));
+	public register(register: Register): Observable<any> {
+		const isRegistered$: Observable<boolean> = from(
+			this.firebaseAuthService.register(register.login, register.password, register.firstName, register.lastName)
+		);
+		const userCreated$: Observable<boolean> = isRegistered$.pipe(
+			switchMap((isRegistered: boolean) => {
+				if (isRegistered) {
+					const currentUser: User | null = this.firebaseAuthService.getCurrentUser();
+					if (currentUser) {
+						const userModel: Omit<UserModel, 'id'> = {
+							email: register.login,
+							firstName: register.firstName,
+							lastName: register.lastName,
+							uid: currentUser.uid,
+						};
+						return this.userService.createUser(userModel).pipe(
+							concatMap((userId: string) => {
+								return this.userService.getOneUser(userId).pipe(
+									map((userJustCreated: UserModel) => {
+										this.storageService.storeUser(userJustCreated);
+										return true;
+									})
+								);
+							})
+						);
+					} else {
+						throw new Error('Error contact administerato');
+					}
+				} else {
+					return of(isRegistered);
+				}
+			})
+		);
+		return userCreated$;
 	}
 
 	public isLoggedIn(): Promise<boolean> {
@@ -29,19 +64,26 @@ export class AuthService implements IAuthService {
 	}
 
 	public login(credential: Credentials): Observable<boolean> {
-		return from(
-			this.firebaseAuthService
-				.login(credential.login, credential.password)
-				.then(() => {
-					console.log(this.firebaseAuthService.getCurrentUser());
-					// this.storageService.storeUser();
-					// this.routingService.navigate(RoutePathEnum.HOME);
-					return true;
-				})
-				.catch((error) => {
-					console.log(error);
-					return false;
-				})
+		const isLogin$: Observable<boolean> = from(this.firebaseAuthService.login(credential.login, credential.password));
+
+		return isLogin$.pipe(
+			switchMap((isLogin: boolean) => {
+				if (isLogin) {
+					const currentUser: User | null = this.firebaseAuthService.getCurrentUser();
+					if (currentUser) {
+						return this.userService.getUserByuuid(currentUser.uid).pipe(
+							map((userJustCreated: UserModel) => {
+								this.storageService.storeUser(userJustCreated);
+								return true;
+							})
+						);
+					} else {
+						throw new Error('Error contact administrator');
+					}
+				} else {
+					return of(false);
+				}
+			})
 		);
 	}
 

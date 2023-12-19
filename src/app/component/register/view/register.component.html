@@ -26,7 +26,7 @@
       </mat-form-field>
 
       <div class="centered-column">
-        <p class="already" (click)="goOnLoginPage()">{{'already' | trad:i18nNamespace | async}}</p>
+        <p class="already  clickable" (click)="goOnLoginPage()">{{'already' | trad:i18nNamespace | async}}</p>
         <app-confirm-button [text]="'register' | trad: 'general.button' | async" [isDisabled]="form.invalid"
           [isLoading]="isLoading" (emitKeyUpEnter)="onValid()"></app-confirm-button>
       </div>

@@ -14,9 +14,8 @@
         <input matInput required type="password" [formControlName]="i18nCredential.PASSWORD">
       </mat-form-field>
 
-      <div class="actions">
-
-        <p class="already" (click)="goOnRegisterPage()">{{'already' | trad:i18nNamespace | async}}</p>
+      <div class="centered-column">
+        <p class="already clickable" (click)="goOnRegisterPage()">{{'already' | trad:i18nNamespace | async}}</p>
         <app-confirm-button [text]="'login' | trad: 'general.button' | async" [isDisabled]="form.invalid"
           [isLoading]="isLoading" (emitKeyUpEnter)="onValid()"></app-confirm-button>
       </div>

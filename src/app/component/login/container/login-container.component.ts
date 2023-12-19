@@ -52,7 +52,7 @@ export class LoginContainerComponent implements OnInit {
 		);
 	}
 
-	public goOnRegisterPage(): void {
+	public goOnRegisterPage(isGo: boolean): void {
 		this.routingService.navigate(RoutePathEnum.REGISTER);
 	}
 }

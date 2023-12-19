@@ -7,7 +7,7 @@ export interface IAuthService {
 	isLoggedIn(): Promise<boolean>;
 	logout(): any;
 	getCurrentUser(): UserModel;
-	register(credential: Credentials): any;
+	register(credential: Credentials): Observable<any>;
 	// getToken(): Promise<string>;
 	// refreshToken(): Promise<string>;
 }
