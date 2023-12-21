@@ -154,7 +154,7 @@
       "creator":"Créateur",
       "title":"Titre",
       "type":"Type",
-      "token":"Token à partager pour intégrer l'évènement",
+      "token":"Token",
       "statu":{
         "default":"Statu",
         "variant":{

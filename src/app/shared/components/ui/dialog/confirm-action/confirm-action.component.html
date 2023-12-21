@@ -11,11 +11,11 @@
 
   <div class="container-buttons">
     <div>
-      <button mat-raised-button mat-dialog-close (click)="onDismiss()" tabindex="-1">
+      <button class="color-primary" mat-raised-button mat-dialog-close (click)="onDismiss()" tabindex="-1">
         {{ cancelButtonText }}</button>
     </div>
     <div>
-      <button mat-raised-button color="warn" (click)="onConfirm()" tabindex="1">
+      <button class="color-warn" mat-raised-button color="warn" (click)="onConfirm()" tabindex="1">
         {{ confirmButtonText }}
       </button>
     </div>

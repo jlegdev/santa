@@ -1,9 +1,10 @@
 <div class="container-information">
   <!-- <button *ngIf="isEventOfCurrentUser" mat-icon-button type="button" (click)="OnUpdateEvent()">update</button> -->
-  <p>{{i18nEvent.TOKEN | trad : i18nEvent.NAMESPACE_CLASS | async}} : {{event.token}}</p>
+  <p *ngIf="isEventOfCurrentUser">{{i18nEvent.TOKEN | trad : i18nEvent.NAMESPACE_CLASS | async}} : {{event.token}}</p>
   <p>{{i18nEvent.CREATOR | trad : i18nEvent.NAMESPACE_CLASS | async}} : {{event.creator.firstName + '
     '+event.creator.lastName}}</p>
-  <p> {{i18nEvent.DATE_EVENT| trad : i18nEvent.NAMESPACE_CLASS| async }} : {{event.dateEvent | date}}
+  <p> {{i18nEvent.DATE_EVENT| trad : i18nEvent.NAMESPACE_CLASS| async }} : {{event.dateEvent.toMillis() |
+    date:'dd/MM/yyyy'}}
   </p>
   <p> {{i18nEvent.BUDGET| trad : i18nEvent.NAMESPACE_CLASS | async }} : {{event.budget |
     currency:'EUR'}}</p>

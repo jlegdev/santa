@@ -2,8 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ImgPathEnum } from 'src/app/enum/img.path.enum';
 import { LoadingState } from 'src/app/enum/loading-state.enum';
+import { RoutePathEnum } from 'src/app/enum/route.path.enum';
 import { CredentialTrad, Credentials } from 'src/app/model/credentials.model';
+import { AuthService } from 'src/app/service/api/auth.service';
 import { LoginFormService } from 'src/app/service/form/login.form.service';
+import { RoutingService } from 'src/app/service/utils/routing.service';
 import { SubSink } from 'subsink';
 
 @Component({
@@ -32,11 +35,17 @@ export class LoginComponent implements OnInit {
 	public readonly i18nCredential = CredentialTrad;
 	public readonly i18nNamespace: string = 'login';
 
-	constructor(private loginFormService: LoginFormService) {
+	constructor(private authService: AuthService, private loginFormService: LoginFormService, private routingService: RoutingService) {
 		this.form = this.loginFormService.getForm();
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.authService.isLoggedIn().then((isLoggedIn: boolean) => {
+			if (isLoggedIn) {
+				this.routingService.navigate(RoutePathEnum.HOME);
+			}
+		});
+	}
 
 	ngOnDestroy() {
 		this._subs.unsubscribe();

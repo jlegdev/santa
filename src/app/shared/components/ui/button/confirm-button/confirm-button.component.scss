@@ -1,0 +1,22 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+@mixin confirm-button($theme) {
+  $color-config: mat.get-color-config($theme);
+  $primaryPalette: map.get($color-config, primary);
+  $primary : mat.get-color-from-palette($primaryPalette, 500, 0.5);
+  .color-primary{
+    background-color: $primary;
+    color:white;
+  }
+}
+
+.color-primary {
+  background-color: #990000 !important;
+  color: white !important;
+}
+
+.color-primary:disabled {
+  opacity: 0.5;
+  color: white !important;
+}
